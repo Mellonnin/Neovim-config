@@ -12,7 +12,6 @@ return {
         config = function()
             local builtin = require("telescope.builtin")
             require("telescope").load_extension("recent-files")
-            local actions = require("telescope.actions")
             local recent_file = require('telescope').extensions['recent-files']
             require("telescope").setup({
                 extensions = {
@@ -40,39 +39,17 @@ return {
             pcall(require("telescope").load_extension, 'fzf')
             pcall(require("telescope").load_extension, 'ui-select')
 
-            vim.keymap.set("n", "<leader>lg", builtin.live_grep, { desc = 'Search word ' })
-            vim.keymap.set('n', '<leader>sg', builtin.grep_string, { desc = 'Search current word' })
-            vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search diagnostics' })
+            vim.keymap.set("n", "<leader>fl", builtin.live_grep, { desc = 'Search word ' })
+            vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Search current word' })
+            vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnostics' })
             vim.keymap.set('n', '<leader>ff', function() recent_file.recent_files({}) end,
-                { noremap = true, silent = true })
+                { noremap = true, silent = true, desc='fuzzy finding in recent files'})
 
-            vim.keymap.set('n', '<leader>s.', function()
+            vim.keymap.set('n', '<leader>fb', function()
                 builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
                     winblend = 10, previewer = false,
                 })
-            end, { desc = '[/] Fuzzily search in current buffer' })
-            vim.keymap.set("n", "<leader>gc", builtin.git_commits, {
-                desc = 'Search commits '
-                -- Lists git commits with diff preview, checkout action <cr>, reset mixed <C-r>m, reset soft <C-r>s and reset hard <C-r>h
-            })
-            vim.keymap.set("n", "<leader>cb", builtin.git_bcommits, {
-                desc = 'Search buffer commits '
-                -- Lists buffer's git commits with diff preview and checks them out on <cr>
-            })
-            vim.keymap.set("n", "<leader>gb", builtin.git_branches, {
-                desc = 'Search branch '
-                -- Lists all branches with log preview, checkout action <cr>, track action <C-t>,
-                -- rebase action<C-r>, create action <C-a>, switch action <C-s>,
-                -- delete action <C-d> and merge action <C-y>
-            })
-            vim.keymap.set("n", "<leader>gt", builtin.git_status, {
-                desc = 'Search status word '
-                --Lists current changes per file with diff preview and add action.
-            })
-            vim.keymap.set("n", "<leader>gs", builtin.git_stash, {
-                desc = 'Search stash word '
-                --Lists stash items in current repository with ability to apply them on <cr>
-            })
+            end, { desc = 'Fuzzily search in current buffer' })
         end
     },
 }

@@ -13,7 +13,7 @@ return {
         columns = { "icon" },
         keymaps = {
           ["<C-h>"] = false,
-          ["<M-h>"] = "actions.select_split",
+          ["<C-H>"] = "actions.select_split",
         },
         win_options = {
           winbar = "%{v:lua.CustomOilBar()}",
@@ -27,7 +27,7 @@ return {
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
       -- Open parent directory in floating window
-      vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+      vim.keymap.set("n", "<leader>-", require("oil").toggle_float, {desc= "open directory in floating window"})
     end,
   },
 }

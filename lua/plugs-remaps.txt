@@ -1,24 +1,41 @@
 -- base
-("i")("n")("v") C-c   esc
-("n") leader-s        find and replace all under cursor
-("x") P               continua ad incollare quello nel buffer senza perderlo
-("n") N               cerca termine precedente
-("n") n               cerca termine successivo
-("n") J               join linea sotto
-("v") J               sposta la riga sotto
-("v") K               sposta la riga sopra
-("i") jj              esc
-("n") leader-ef       ritorna al file explorer
-("n") [d              vai al messaggio diagnostico precedente
-("n") ]d              vai al messaggio diagnostico successivo
-("n") leader-sl       apre la lista dei mesaggi diagnostici della pagina con quickfix
-("n") tl              buffer last
-("n") th              buffer first
-("n") tj              buffer prev
-("n") tk              buffer next
-("n") td              buffer delete	
-("n") U               redo changes
-("n") %               find the next bracket on this line matching or predecessor directive
+("n") leader-s          find and replace all under cursor
+("n") P                 paste before cursor
+("n") N                 cerca termine precedente
+("n") n                 cerca termine successivo
+("n") J                 join linea sotto
+("v") J                 sposta la riga sotto
+("v") K                 sposta la riga sopra
+("v") H                 sposta la riga a sinistra
+("v") L                 sposta la riga a destra
+("n") -                 ritorna al file explorer, nel file explorer va alla directory superiore
+("n") leader-sl         apre la lista dei mesaggi diagnostici della pagina con quickfix
+("n") U                 redo changes
+("n") %                 find the next bracket on this line matching or predecessor directive
+("i") ctrl-o            in insert permette di avere un comando di normal solo una volta e poi ti porta in insert
+("n") 0			        to the first character of the line. 
+("n") _			        to the first non-blank character of the line.
+("n") $	                salta alla fine della riga rimanendo in n-mode 
+("n") gg		        move to the top of the file 
+("n") G			        move to the bottom of the file 
+("n") d	                delete one line
+("n") D	                delete to the end of the line
+("n") y/d/v n           delete/yank/highlight to the next search pattern match
+("n") y/d/v N           delete/yank/highlight to the previous search pattern match
+("n") y/d/v $           delete/yank/highlight/jump all after curcor (incluso)
+("n") y/d/v 0           delete/yank/highlight/jump all before cursor (escluso)
+("n") y/d/v F<char>     delete/yank/highlight/jump all before until <char> (incluso)
+("n") y/d/v T<char>     delete/yank/highlight/jump all before until <char> (escluso)
+("n") y/d/v f<char>     delete/yank/highlight/jump all after until <char> (incluso) 
+("n") y/d/v t<char>     delete/yank/highlight/jump all after until <char> (escluso)
+("n") y/d/v b           delete/yank/highlight/jump word/WORD before cursor (carattere su cui sto escluso)
+("n") y/d/v w           delete/yank/highlight/jump word/WORD until next(incluso)
+("n") y/d/v e           delete/yank/highlight/jump next word (incluso)
+("n") y/d/v E           delete/yank/highlight/jump next WORD (incluso)
+("n") y/d/v E           delete/yank/highlight/jump next WORD (incluso)
+("n") m/M               delete/yank/highlight/jump move to the end of the previous word/WORD (incluso)
+("n") x
+("n") X
 
 --cmp
 <C-cc>  close
@@ -32,6 +49,10 @@
 ("n") C-h           toggle harpoon menu
 ("n") C-d           next appended item
 ("n") C-f           prev appended item
+
+
+--hop da implementare
+
 
 -- quality of life
 ("n")("v") sa     add surrounding cosa
@@ -51,9 +72,6 @@
 !.mp3$ 	inverse-suffix-exact-match 	Items that do not end with .mp3
 
 A single bar character term acts as an OR operator.
-For example, the following query matches entries that start with core and end with either go, rb, or py.
-
-^core go$ | rb$ | py$
 
 ("n") leader-ff     find file
 ("n") leader-lg     live grep
@@ -69,30 +87,50 @@ For example, the following query matches entries that start with core and end wi
 ("i")("n") <C-x> 	Go to file selection as a split
 ("i")("n") <C-v> 	Go to file selection as a vsplit
 ("i")("n") <C-t> 	Go to a file in a new tab
-("n")<C-U> 	        Scroll up in preview window
-("n")<C-D> 	        Scroll down in preview window
-("n")<C-u> 	        Scroll up in result window
-("n")<C-d> 	        Scroll down in result window
+
+--treesitter in visual mode extend 
+("n")("v") d/c/y of     outer function 
+("n")("v") d/c/y if     inner function
+("n")("v") d/c/y os     outer class 
+("n")("v") d/c/y is     inner class 
+("n")("v") d/c/y ol     outer loop 
+("n")("v") d/c/y il     inner loop 
+("n")("v") d/c/y op     outer parameter 
+("n")("v") d/c/y ip     inner parameter 
+("n")("v") d/c/y oc     outer conditional 
+("n")("v") d/c/y ic     inner conditional 
+("n")("v") d/c/y a"     whole double quoted string
+("n")("v") d/c/y i"		inner double quoted string 
+("n")("v") d/c/y a'		whole single quoted string
+("n")("v") d/c/y i'		inner single quoted string 
+("n")("v") d/c/y a<		whole '<' to '>'
+("n")("v") d/c/y i<		inner '<' to '>' 
+("n")("v") d/c/y a`		whole string in backticks
+("n")("v") d/c/y i`		inner string in backticks 
+("n")("v") d/c/y aB		whole "{" to "}" 
+("n")("v") d/c/y iB		inner "{" and "}"
+("n")("v") d/c/y ab		whole "(" to ")"
+("n")("v") d/c/y ib		inner "(" to ")"
+("n")("v") d/c/y a[		whole '[' to ']'
+("n")("v") d/c/y i[		inner '[' to ']' 
+("n")("v") d/c/y ap		paragraph with white space
+("n")("v") d/c/y ip		inner paragraph without white space
+("n")("v") d/c/y as		whole sentence with white space
+("n")("v") d/c/y is		inner sentence without white space
+("n")("v") d/c/y at		whole tag block //for ml
+("n")("v") d/c/y it		inner tag block
+("n")("v") d/c/y aW		whole WORD with white space
+("n")("v") d/c/y iW		inner WORD
+("n")("v") d/c/y aw		whole word with white space
+("n")("v") d/c/y iw		inner word
+
+-- [[ word vs WORD
+This "stuff" is not-so difficult!
+wwww  wwwww  ww www ww wwwwwwwww  
+WWWW WWWWWWW WW WWWWWW WWWWWWWWWW
+]]
 
 
-
-<C-f> 	Scroll left in preview window
-<C-k> 	Scroll right in preview window
-<M-f> 	Scroll left in results window
-<M-k> 	Scroll right in results window
-
-
---treesitter
-("n") d/c/y of    function outer
-("n") d/c/y if    function inner
-("n") d/c/y os    class outer
-("n") d/c/y is    class inner
-("n") d/c/y ol    loop outer
-("n") d/c/y il    loop inner
-("n") d/c/y op    parameter outer
-("n") d/c/y ip    parameter inner
-("n") d/c/y oc    conditional outer
-("n") d/c/y ic    conditional inner
 ("n") ] + o/i/ + (f,s,c,l,p) goto_next_start 
 ("n") ] + (f,s,c,l,p) + o/i  goto_next_end 
 ("n") [ + o/i/ + (f,s,c,l,p) goto_previous_start
@@ -122,8 +160,11 @@ For example, the following query matches entries that start with core and end wi
 
 
 
+
+-- da implementare totalmente
 -- git 
 ("n") leader-gs     comando git
+("n") leader-gg     git graph
 
 
 
@@ -148,29 +189,3 @@ For example, the following query matches entries that start with core and end wi
 ("n") leader-wl            lista tutti i workspace folder
 ("n") leader-rn            rinomina parola sotto il cursore in tutti i buffer
 ("n") leader-fo            format file
-
---marks
-("n") m,                Set next available lowercase mark at cursor.
-("n") m;                Toggle next available mark at cursor.
-("n") mdb               Deletes all marks in current buffer.
-("n") m]                Goes to next mark in buffer.
-("n") m[                Goes to previous mark in buffer.
-("n") m:                Previews mark (will wait for user input).
-("n") dm                Delete a letter mark (will wait for input).
-("n") md                Deletes the bookmark under the cursor.
-("n") leader-ml         list all marks in the current buffer
-("n") '{nome registro}  salta al mark con quel nome
-
-
-
-
-
-// da provare
-folke/falsh
-fnune/recall
-https://www.reddit.com/r/neovim/comments/1chkk2n/what_plugins_do_you_find_essential/
-
-// da implementare 
-ctrl o in insert permette di 
-avere un comando di normal solo 
-una volta e poi ti porta in insert

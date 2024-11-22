@@ -1,16 +1,5 @@
 return {
-    -- complition section
-    {
-      "j-hui/fidget.nvim",
-      config = function() require("fidget").setup({}) end
-    },
-   {
-     "L3MON4D3/LuaSnip",
-     dependencies = {
-       "saadparwaiz1/cmp_luasnip",
-       'rafamadriz/friendly-snippets'
-     }
-   },
+    {"L3MON4D3/LuaSnip", dependencies = { "saadparwaiz1/cmp_luasnip", 'rafamadriz/friendly-snippets' }},
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -33,7 +22,7 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-cc>"] = cmp.mapping.close(),
+                    ["<C-z>"] = cmp.mapping.close(),
                     ['<tab>'] = cmp.mapping.confirm({ select = true }),
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<C-p>"] = cmp.mapping.select_prev_item(),

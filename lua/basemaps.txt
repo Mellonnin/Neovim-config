@@ -72,7 +72,6 @@ F{char}		1             cursor to the Nth occurrence of {char} to the left
 G		1                   cursor to line N, default last line
 H		1                   cursor to line N from top of screen
 I		2                   insert text before the first CHAR on the line N times
-J		2                   Join N lines; default is 2
 L		1                   cursor to line N from bottom of screen
 M		1                   cursor to middle line of screen
 N		1                   repeat the latest '/' or '?' N times in opposite direction
@@ -85,8 +84,6 @@ V		                    start linewise Visual mode
 W		1                   cursor N WORDS forward
 ["x]X		2               delete N characters before the cursor [into register x]
 ["x]Y		                yank N lines [into register x]; synonym for "yy" Note: Mapped to "y$" by default.
-ZZ		                  write if buffer changed and close window
-ZQ		                  close window without writing
 ^		1                   cursor to the first CHAR of the line
 _		1                   cursor to the first CHAR N - 1 lines lower
 `{a-zA-Z0-9}	1         cursor to the mark {a-zA-Z0-9}
@@ -127,35 +124,6 @@ z{char}		              commands starting with 'z', see |z| below
 |		|		1               cursor to column N
 }		1                   cursor N paragraphs forward
 ~		2                   'tildeop' off: switch case of N characters under cursor and move the cursor N characters to the right
-==============================================================================
-2.1 Text objects						*objects*
-
-These can be used after an operator or in Visual mode to select an object.
-
-tag		command		   action in op-pending and Visual mode	 
-------------------------------------------------------------------------------  
-a"		   double quoted string
-a'		   single quoted string
-a<		   "a <>" from '<' to the matching '>'
-aB		   "a Block" from "[{" to "]}" (with brackets)
-aW		   "a WORD" (with white space)
-a[		   "a []" from '[' to the matching ']'
-a`		   string in backticks
-ab		   "a block" from "[(" to "])" (with braces)
-ap		   "a paragraph" (with white space)
-at		   "a tag block" (with white space)
-aw		   "a word" (with white space)
-i"		   double quoted string without the quotes
-i'		   single quoted string without the quotes
-i<		   "inner <>" from '<' to the matching '>'
-iB		   "inner Block" from "[{" and "]}"
-iW		   "inner WORD"
-i[		   "inner []" from '[' to the matching ']'
-i`		   string in backticks without the backticks
-ib		   "inner block" from "[(" to "])"
-is		   "inner sentence"
-it		   "inner tag block"
-iw		   "inner word"
 ==============================================================================
 2.3 Square bracket commands					*[* *]*
 
@@ -318,40 +286,16 @@ U		2         make highlighted area uppercase
 V		          make Visual mode linewise or stop Visual mode
 X		2         delete the highlighted lines
 Y		          yank the highlighted lines
-a"		        extend highlighted area with a double quoted string
-a'		        extend highlighted area with a single quoted string
-a<		        extend highlighted area with a <> block
-aB		        extend highlighted area with a {} block
-aW		        extend highlighted area with "a WORD"
-a[		        extend highlighted area with a [] block
-a`		        extend highlighted area with a backtick quoted string
-ab		        extend highlighted area with a () block
-ap		        extend highlighted area with a paragraph
-as		        extend highlighted area with a sentence
-at		        extend highlighted area with a tag block
-aw		        extend highlighted area with "a word"
 c		2         delete highlighted area and start insert
 d		2         delete highlighted area
 gJ		2       join the highlighted lines without inserting spaces
 gv		        exchange current and previous highlighted area
-i"		        extend highlighted area with a double quoted string (without quotes)
-i'		        extend highlighted area with a single quoted string (without quotes)
-i<		        extend highlighted area with inner <> block
-iB		        extend highlighted area with inner {} block
-iW		        extend highlighted area with "inner WORD"
-i[		        extend highlighted area with inner [] block
-i`		        extend highlighted area with a backtick quoted string (without the backticks)
-ib		        extend highlighted area with inner () block
-is		        extend highlighted area with inner sentence
-it		        extend highlighted area with inner tag block
-iw		        extend highlighted area with "inner word"
 o		          move cursor to other corner of area
 p		          replace highlighted area with register contents; deleted text in unnamed register
 r		2         replace highlighted area with a character
 u		2         make highlighted area lowercase
 v		          make Visual mode charwise or stop Visual mode
 x		      2   delete the highlighted area
-y		          yank the highlighted area
 
 
 
@@ -392,13 +336,6 @@ y		          yank the highlighted area
 |:autocmd|	:au[tocmd]	enter or show autocommands
 |:augroup|	:aug[roup]	select the autocommand group to use
 |:aunmenu|	:aun[menu]	remove menu for all modes
-|:buffer|	:b[uffer]	go to specific buffer in the buffer list
-|:bNext|	:bN[ext]	go to previous buffer in the buffer list
-|:ball|		:ba[ll]		open a window for each buffer in the buffer list
-|:badd|		:bad[d]		add buffer to the buffer list
-|:balt|		:balt		like ":badd" but also set the alternate file
-|:bdelete|	:bd[elete]	remove a buffer from the buffer list
-|:behave|	:be[have]	set mouse and selection behavior
 |:belowright|	:bel[owright]	make split window appear right or below
 |:bfirst|	:bf[irst]	go to first buffer in the buffer list
 |:blast|	:bl[ast]	go to last buffer in the buffer list
@@ -504,7 +441,7 @@ y		          yank the highlighted area
 |:echoerr|	:echoe[rr]	like :echo, show like an error and use history
 |:echohl|	:echoh[l]	set highlighting for echo commands
 |:echomsg|	:echom[sg]	same as :echo, put message in history
-|:echon|	:echon		same as :echo, but without <EOL>
+|:echon|	:echon		same as :echo, but without <EOL>>>
 |:emenu|	:em[enu]	execute a menu by name
 |:endfunction|	:endf[unction]	end of a user function started with :function
 |:endtry|	:endt[ry]	end previous :try
@@ -858,29 +795,6 @@ y		          yank the highlighted area
 
 
 
-==============================================================================
-1. Motions and operators				*operator*
-
-The motion commands can be used after an operator command, to have the command
-operate on the text that was moved over.  That is the text between the cursor
-position before and after the motion.  Operators are generally used to delete
-or change text.  The following operators are available:
-
-	|c|	c	change
-	|d|	d	delete
-	|y|	y	yank into register (does not change the text)
-	|~|	~	swap case (only if 'tildeop' is set)
-	|g~|	g~	swap case
-	|gu|	gu	make lowercase
-	|gU|	gU	make uppercase
-	|!|	!	filter through an external program
-	|=|	=	filter through 'equalprg' or C-indenting if empty
-	|g?|	g?	ROT13 encoding
-  |>|	>	shift right
-	|<|	<	shift left
-	|zf|	zf	define a fold
-	|g@|	g@	call function set with the 'operatorfunc' option
-			
               *motion-count-multiplied*
 If the motion includes a count and the operator also had a count before it,
 the two counts are multiplied.  For example: "2d3w" deletes six words.
@@ -1367,14 +1281,6 @@ iW			"inner WORD", select [count] WORDs (see |WORD|).
 			Visual charwise mode.
 
 							*v_as* *as*
-as			"a sentence", select [count] sentences (see
-			|sentence|).
-			When used in Visual mode it is made charwise.
-
-							*v_is* *is*
-is			"inner sentence", select [count] sentences (see
-			|sentence|).
-			When used in Visual mode it is made charwise.
 
 							*v_ap* *ap*
 ap			"a paragraph", select [count] paragraphs (see
@@ -1508,34 +1414,6 @@ When start and end of the Visual area are not the same:
 	direction in which this happens depends on which side of the Visual
 	area the cursor is.  For the block objects the block is extended one
 	level outwards.
-
-For illustration, here is a list of delete commands, grouped from small to big
-objects.  Note that for a single character and a whole line the existing vi
-movement commands are used.
-	"dl"	delete character (alias: "x")		|dl|
-	"diw"	delete inner word			*diw*
-	"daw"	delete a word				*daw*
-	"diW"	delete inner WORD (see |WORD|)		*diW*
-	"daW"	delete a WORD (see |WORD|)		*daW*
-	"dgn"   delete the next search pattern match    *dgn*
-	"dd"	delete one line				|dd|
-	"dis"	delete inner sentence			*dis*
-	"das"	delete a sentence			*das*
-	"dib"	delete inner '(' ')' block		*dib*
-	"dab"	delete a '(' ')' block			*dab*
-	"dip"	delete inner paragraph			*dip*
-	"dap"	delete a paragraph			*dap*
-	"diB"	delete inner '{' '}' block		*diB*
-	"daB"	delete a '{' '}' block			*daB*
-
-Note the difference between using a movement command and an object.  The
-movement command operates from here (cursor position) to where the movement
-takes us.  When using an object the whole object is operated upon, no matter
-where on the object the cursor is.  For example, compare "dw" and "daw": "dw"
-deletes from the cursor position to the start of the next word, "daw" deletes
-the word under the cursor and the space after or before it.
-
-
 ==============================================================================
 7. Marks					*mark-motions* *E20* *E78*
 
@@ -2113,447 +1991,3 @@ Starting with the cursor on "body_two()", using "[m" will jump to the '{' at
 the start of "method_two()" (obviously this is much more useful when the
 method is long!).  Using "2[m" will jump to the start of "method_one()".
 Using "3[m" will jump to the start of the class.
-
-						*[#*
-[#			Go to [count] previous unmatched "#if" or "#else".
-			|exclusive| motion.
-
-						*]#*
-]#			Go to [count] next unmatched "#else" or "#endif".
-			|exclusive| motion.
-
-These two commands work in C programs that contain #if/#else/#endif
-constructs.  It brings you to the start or end of the #if/#else/#endif where
-the current line is included.  You can then use "%" to go to the matching line.
-
-						*[star* *[/*
-[*  or  [/		Go to [count] previous start of a C comment "/*".
-			|exclusive| motion.
-
-						*]star* *]/*
-]*  or  ]/		Go to [count] next end of a C comment "*/".
-			|exclusive| motion.
-
-
-						*H*
-H			To line [count] from top (Home) of window (default:
-			first line on the window) on the first non-blank
-			character |linewise|.  See also 'startofline' option.
-			Cursor is adjusted for 'scrolloff' option, unless an
-			operator is pending, in which case the text may
-			scroll.  E.g. "yH" yanks from the first visible line
-			until the cursor line (inclusive).
-
-						*M*
-M			To Middle line of window, on the first non-blank
-			character |linewise|.  See also 'startofline' option.
-
-						*L*
-L			To line [count] from bottom of window (default: Last
-			line on the window) on the first non-blank character
-			|linewise|.  See also 'startofline' option.
-			Cursor is adjusted for 'scrolloff' option, unless an
-			operator is pending, in which case the text may
-			scroll.  E.g. "yL" yanks from the cursor to the last
-			visible line.
-
-
-
-
-
-
-String manipulation:					*string-functions*
-	nr2char()		get a character by its number value
-	list2str()		get a character string from a list of numbers
-	char2nr()		get number value of a character
-	str2list()		get list of numbers from a string
-	str2nr()		convert a string to a Number
-	str2float()		convert a string to a Float
-	escape()		escape characters in a string with a '\'
-	shellescape()		escape a string for use with a shell command
-	fnameescape()		escape a file name for use with a Vim command
-	tr()			translate characters from one set to another
-	strtrans()		translate a string to make it printable
-	keytrans()		translate internal keycodes to a form that can be used by |:map|
-	tolower()		turn a string to lowercase
-	toupper()		turn a string to uppercase
-	charclass()		class of a character
-	match()			position where a pattern matches in a string
-	matchend()		position where a pattern match ends in a string
-	matchfuzzy()		fuzzy matches a string in a list of strings
-	matchfuzzypos()		fuzzy matches a string in a list of strings
-	matchstr()		match of a pattern in a string
-	matchstrpos()		match and positions of a pattern in a string
-	matchlist()		like matchstr() and also return submatches
-	stridx()		first index of a short string in a long string
-	strridx()		last index of a short string in a long string
-	strlen()		length of a string in bytes
-	strcharlen()		length of a string in characters
-	strchars()		number of characters in a string
-	strwidth()		size of string when displayed
-	setcellwidths()		set character cell width overrides
-	getcellwidths()		get character cell width overrides
-	substitute()		substitute a pattern match with a string
-	submatch()		get a specific match in ":s" and substitute()
-	strpart()		get part of a string using byte index
-	strcharpart()		get part of a string using char index
-	strgetchar()		get character from a string using char index
-	expand()		expand special keywords
-	expandcmd()		expand a command like done for `:edit`
-	iconv()			convert text from one encoding to another
-	byteidx()		byte index of a character in a string
-	byteidxcomp()		like byteidx() but count composing characters
-	charidx()		character index of a byte in a string
-	repeat()		repeat a string multiple times
-	eval()			evaluate a string expression
-	execute()		execute an Ex command and get the output
-	win_execute()		like execute() but in a specified window
-	trim()			trim characters from a string
-	gettext()		lookup message translation
-
-List manipulation:					*list-functions*
-	get()			get an item without error for wrong index
-	len()			number of items in a List
-	empty()			check if List is empty
-	insert()		insert an item somewhere in a List
-	add()			append an item to a List
-	extend()		append a List to a List
-	extendnew()		make a new List and append items
-	remove()		remove one or more items from a List
-	copy()			make a shallow copy of a List
-	deepcopy()		make a full copy of a List
-	filter()		remove selected items from a List
-	map()			change each List item
-	reduce()		reduce a List to a value
-	sort()			sort a List
-	reverse()		reverse the order of a List or Blob
-	uniq()			remove copies of repeated adjacent items
-	split()			split a String into a List
-	join()			join List items into a String
-	range()			return a List with a sequence of numbers
-	string()		String representation of a List
-	call()			call a function with List as arguments
-	index()			index of a value in a List or Blob
-	indexof()		index in a List or Blob where an expression evaluates to true
-	max()			maximum value in a List
-	min()			minimum value in a List
-	count()			count number of times a value appears in a List
-	repeat()		repeat a List multiple times
-	flatten()		flatten a List
-	flattennew()		flatten a copy of a List
-Other computation:					*bitwise-function*
-	and()			bitwise AND
-	invert()		bitwise invert
-	or()			bitwise OR
-	xor()			bitwise XOR
-	sha256()		SHA-256 hash
-	rand()			get a pseudo-random number
-	srand()			initialize seed used by rand()
-
-Variables:						*var-functions*
-	type()			type of a variable
-	islocked()		check if a variable is locked
-	funcref()		get a Funcref for a function reference
-	function()		get a Funcref for a function name
-	getbufvar()		get a variable value from a specific buffer
-	setbufvar()		set a variable in a specific buffer
-	getwinvar()		get a variable from specific window
-	setwinvar()		set a variable in a specific window
-	garbagecollect()	possibly free memory
-
-Cursor and mark position:		*cursor-functions* *mark-functions*
-	col()			column number of the cursor or a mark
-	virtcol()		screen column of the cursor or a mark
-	line()			line number of the cursor or mark
-	wincol()		window column number of the cursor
-	winline()		window line number of the cursor
-	cursor()		position the cursor at a line/column
-	screencol()		get screen column of the cursor
-	screenrow()		get screen row of the cursor
-	screenpos()		screen row and col of a text character
-	virtcol2col()		byte index of a text character on screen
-	getcurpos()		get position of the cursor
-	getpos()		get position of cursor, mark, etc.
-	setpos()		set position of cursor, mark, etc.
-	getmarklist()		list of global/local marks
-	byte2line()		get line number at a specific byte count
-	line2byte()		byte count at a specific line
-	diff_filler()		get the number of filler lines above a line
-	screenattr()		get attribute at a screen line/row
-	screenchar()		get character code at a screen line/row
-	screenchars()		get character codes at a screen line/row
-	screenstring()		get string of characters at a screen line/row
-	charcol()		character number of the cursor or a mark
-	getcharpos()		get character position of cursor, mark, etc.
-	setcharpos()		set character position of cursor, mark, etc.
-	getcursorcharpos()	get character position of the cursor
-	setcursorcharpos()	set character position of the cursor
-
-Working with text in the current buffer:		*text-functions*
-	getline()		get a line or list of lines from the buffer
-	setline()		replace a line in the buffer
-	append()		append line or list of lines in the buffer
-	indent()		indent of a specific line
-	cindent()		indent according to C indenting
-	lispindent()		indent according to Lisp indenting
-	nextnonblank()		find next non-blank line
-	prevnonblank()		find previous non-blank line
-	search()		find a match for a pattern
-	searchpos()		find a match for a pattern
-	searchcount()		get number of matches before/after the cursor
-	searchpair()		find the other end of a start/skip/end
-	searchpairpos()		find the other end of a start/skip/end
-	searchdecl()		search for the declaration of a name
-	getcharsearch()		return character search information
-	setcharsearch()		set character search information
-
-Working with text in another buffer:
-	getbufline()		get a list of lines from the specified buffer
-	getbufoneline()		get a one line from the specified buffer
-	setbufline()		replace a line in the specified buffer
-	appendbufline()		append a list of lines in the specified buffer
-	deletebufline()		delete lines from a specified buffer
-
-					*system-functions* *file-functions*
-System functions and manipulation of files:
-	glob()			expand wildcards
-	globpath()		expand wildcards in a number of directories
-	glob2regpat()		convert a glob pattern into a search pattern
-	findfile()		find a file in a list of directories
-	finddir()		find a directory in a list of directories
-	resolve()		find out where a shortcut points to
-	fnamemodify()		modify a file name
-	pathshorten()		shorten directory names in a path
-	simplify()		simplify a path without changing its meaning
-	filereadable()		check if a file can be read
-	filewritable()		check if a file can be written to
-	getfperm()		get the permissions of a file
-	setfperm()		set the permissions of a file
-	getftype()		get the kind of a file
-	isdirectory()		check if a directory exists
-	getfsize()		get the size of a file
-	getcwd()		get the current working directory
-	haslocaldir()		check if current window used |:lcd| or |:tcd|
-	tempname()		get the name of a temporary file
-	mkdir()			create a new directory
-	chdir()			change current working directory
-	delete()		delete a file
-	rename()		rename a file
-	system()		get the result of a shell command as a string
-	systemlist()		get the result of a shell command as a list
-	environ()		get all environment variables
-	getenv()		get one environment variable
-	setenv()		set an environment variable
-	hostname()		name of the system
-	readfile()		read a file into a List of lines
-	readblob()		read a file into a Blob
-	readdir()		get a List of file names in a directory
-	writefile()		write a List of lines or Blob into a file
-
-Date and Time:				*date-functions* *time-functions*
-	getftime()		get last modification time of a file
-	localtime()		get current time in seconds
-	strftime()		convert time to a string
-	strptime()		convert a date/time string to time
-	reltime()		get the current or elapsed time accurately
-	reltimestr()		convert reltime() result to a string
-	reltimefloat()		convert reltime() result to a Float
-
-			*buffer-functions* *window-functions* *arg-functions*
-Buffers, windows and the argument list:
-	argc()			number of entries in the argument list
-	argidx()		current position in the argument list
-	arglistid()		get id of the argument list
-	argv()			get one entry from the argument list
-	bufadd()		add a file to the list of buffers
-	bufexists()		check if a buffer exists
-	buflisted()		check if a buffer exists and is listed
-	bufload()		ensure a buffer is loaded
-	bufloaded()		check if a buffer exists and is loaded
-	bufname()		get the name of a specific buffer
-	bufnr()			get the buffer number of a specific buffer
-	winnr()			get the window number for the current window
-	bufwinid()		get the window ID of a specific buffer
-	bufwinnr()		get the window number of a specific buffer
-	winbufnr()		get the buffer number of a specific window
-	win_findbuf()		find windows containing a buffer
-	win_getid()		get window ID of a window
-	win_gettype()		get type of window
-	win_gotoid()		go to window with ID
-	win_id2win()		get window nr from window ID
-	win_move_separator()	move window vertical separator
-	win_move_statusline()	move window status line
-	win_splitmove()		move window to a split of another window
-	getbufinfo()		get a list with buffer information
-	getwininfo()		get a list with window information
-	getchangelist()		get a list of change list entries
-	getjumplist()		get a list of jump list entries
-	swapinfo()		information about a swap file
-	swapname()		get the swap file path of a buffer
-
-Command line:					*command-line-functions*
-	getcmdcompltype()	get the type of the current command line completion
-	getcmdline()		get the current command line
-	getcmdpos()		get position of the cursor in the command line
-	getcmdscreenpos()	get screen position of the cursor in the command line
-	setcmdline()		set the current command line
-	setcmdpos()		set position of the cursor in the command line
-	getcmdtype()		return the current command-line type
-	getcmdwintype()		return the current command-line window type
-	getcompletion()		list of command-line completion matches
-	fullcommand()		get full command name
-
-Quickfix and location lists:			*quickfix-functions*
-	getqflist()		list of quickfix errors
-	setqflist()		modify a quickfix list
-	getloclist()		list of location list items
-	setloclist()		modify a location list
-
-Insert mode completion:				*completion-functions*
-	complete()		set found matches
-	complete_add()		add to found matches
-	complete_check()	check if completion should be aborted
-	complete_info()		get current completion information
-	pumvisible()		check if the popup menu is displayed
-	pum_getpos()		position and size of popup menu if visible
-
-Folding:					*folding-functions*
-	foldclosed()		check for a closed fold at a specific line
-	foldclosedend()		like foldclosed() but return the last line
-	foldlevel()		check for the fold level at a specific line
-	foldtext()		generate the line displayed for a closed fold
-	foldtextresult()	get the text displayed for a closed fold
-
-Syntax and highlighting:	  *syntax-functions* *highlighting-functions*
-	clearmatches()		clear all matches defined by |matchadd()| and the |:match| commands
-	getmatches()		get all matches defined by |matchadd()| and the |:match| commands
-	hlexists()		check if a highlight group exists
-	hlID()			get ID of a highlight group
-	synID()			get syntax ID at a specific position
-	synIDattr()		get a specific attribute of a syntax ID
-	synIDtrans()		get translated syntax ID
-	synstack()		get list of syntax IDs at a specific position
-	synconcealed()		get info about concealing
-	diff_hlID()		get highlight ID for diff mode at a position
-	matchadd()		define a pattern to highlight (a "match")
-	matchaddpos()		define a list of positions to highlight
-	matcharg()		get info about |:match| arguments
-	matchdelete()		delete a match defined by |matchadd()| or a |:match| command
-	setmatches()		restore a list of matches saved by |getmatches()|
-
-Spelling:					*spell-functions*
-	spellbadword()		locate badly spelled word at or after cursor
-	spellsuggest()		return suggested spelling corrections
-	soundfold()		return the sound-a-like equivalent of a word
-
-History:					*history-functions*
-	histadd()		add an item to a history
-	histdel()		delete an item from a history
-	histget()		get an item from a history
-	histnr()		get highest index of a history list
-
-Interactive:					*interactive-functions*
-	browse()		put up a file requester
-	browsedir()		put up a directory requester
-	confirm()		let the user make a choice
-	getchar()		get a character from the user
-	getcharmod()		get modifiers for the last typed character
-	getmousepos()		get last known mouse position
-	feedkeys()		put characters in the typeahead queue
-	input()			get a line from the user
-	inputlist()		let the user pick an entry from a list
-	inputsecret()		get a line from the user without showing it
-	inputdialog()		get a line from the user in a dialog
-	inputsave()		save and clear typeahead
-	inputrestore()		restore typeahead
-
-GUI:						*gui-functions*
-	getfontname()		get name of current font being used
-	getwinpos()		position of the Vim window
-	getwinposx()		X position of the Vim window
-	getwinposy()		Y position of the Vim window
-	balloon_show()		set the balloon content
-	balloon_split()		split a message for a balloon
-	balloon_gettext()	get the text in the balloon
-
-Vim server:					*server-functions*
-	serverlist()		return the list of server names
-	remote_startserver()	run a server
-	remote_send()		send command characters to a Vim server
-	remote_expr()		evaluate an expression in a Vim server
-	server2client()		send a reply to a client of a Vim server
-	remote_peek()		check if there is a reply from a Vim server
-	remote_read()		read a reply from a Vim server
-	foreground()		move the Vim window to the foreground
-	remote_foreground()	move the Vim server window to the foreground
-
-Window size and position:			*window-size-functions*
-	winheight()		get height of a specific window
-	winwidth()		get width of a specific window
-	win_screenpos()		get screen position of a window
-	winrestcmd()		return command to restore window sizes
-	winsaveview()		get view of current window
-	winrestview()		restore saved view of current window
-
-Mappings and Menus:			    *mapping-functions*
-	digraph_get()		get |digraph|
-	digraph_getlist()	get all |digraph|s
-	digraph_set()		register |digraph|
-	digraph_setlist()	register multiple |digraph|s
-	hasmapto()		check if a mapping exists
-	mapcheck()		check if a matching mapping exists
-	maparg()		get rhs of a mapping
-	mapset()		restore a mapping
-	menu_info()		get information about a menu item
-	wildmenumode()		check if the wildmode is active
-
-
-Testing:				    *test-functions*
-	assert_equal()		assert that two expressions values are equal
-	assert_equalfile()	assert that two file contents are equal
-	assert_notequal()	assert that two expressions values are not equal
-	assert_inrange()	assert that an expression is inside a range
-	assert_match()		assert that a pattern matches the value
-	assert_notmatch()	assert that a pattern does not match the value
-	assert_false()		assert that an expression is false
-	assert_true()		assert that an expression is true
-	assert_exception()	assert that a command throws an exception
-	assert_beeps()		assert that a command beeps
-	assert_nobeep()		assert that a command does not cause a beep
-	assert_fails()		assert that a command fails
-	assert_report()		report a test failure
-
-Timers:						*timer-functions*
-	timer_start()		create a timer
-	timer_pause()		pause or unpause a timer
-	timer_stop()		stop a timer
-	timer_stopall()		stop all timers
-	timer_info()		get information about timers
-	wait()			wait for a condition
-
-Tags:						*tag-functions*
-	taglist()		get list of matching tags
-	tagfiles()		get a list of tags files
-	gettagstack()		get the tag stack of a window
-	settagstack()		modify the tag stack of a window
-
-Prompt Buffer:					*promptbuffer-functions*
-	prompt_getprompt()	get the effective prompt text for a buffer
-	prompt_setcallback()	set prompt callback for a buffer
-	prompt_setinterrupt()	set interrupt callback for a buffer
-	prompt_setprompt()	set the prompt text for a buffer
-
-Registers:					*register-functions*
-	getreg()		get contents of a register
-	getreginfo()		get information about a register
-	getregtype()		get type of a register
-	setreg()		set contents and type of a register
-	reg_executing()		return the name of the register being executed
-	reg_recording()		return the name of the register being recorded
-
-Context Stack:					*ctx-functions*
-	ctxget()		return context at given index from top
-	ctxpop()		pop and restore top context
-	ctxpush()		push given context
-	ctxset()		set context at given index from top
-	ctxsize()		return context stack size

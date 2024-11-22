@@ -22,6 +22,6 @@ return {
                 ['q'] = "quit",
             },
         })
-        vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true, desc='undotree'})
     end
 }
