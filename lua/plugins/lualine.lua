@@ -33,7 +33,7 @@ return {
         },
         sections = {
           lualine_a = {
-            'buffers'
+            'filename'
             --'mode'
           },
           lualine_b = {

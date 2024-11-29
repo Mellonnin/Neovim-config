@@ -1,24 +1,6 @@
 return {
-    {
-        "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup()
-        end
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "clangd",
-                    "gopls",
-                    "lua_ls",
-                    "pylsp",
-                    "sqls",
-                }
-            })
-        end
-    },
+    { "williamboman/mason.nvim",           config = function() require("mason").setup() end },
+    { "williamboman/mason-lspconfig.nvim", config = function() require("mason-lspconfig").setup({ ensure_installed = { "clangd", "gopls", "lua_ls", "pylsp", "sqls", } }) end },
     {
         "neovim/nvim-lspconfig",
         config = function()
@@ -26,19 +8,13 @@ return {
 
             local lspconfig = require("lspconfig")
 
-            lspconfig.lua_ls.setup({capabilities = capabilities})
-            lspconfig.clangd.setup({capabilities = capabilities})
-            lspconfig.pylsp.setup({capabilities = capabilities})
+            lspconfig.lua_ls.setup({ capabilities = capabilities })
+            lspconfig.clangd.setup({ capabilities = capabilities })
+            lspconfig.pylsp.setup({ capabilities = capabilities })
             lspconfig.sqls.setup({ capabilities = capabilities })
-
-
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
                 callback = function(ev)
-                    -- Enable completion triggered by <c-x><c-o>
-                    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-                    -- Buffer local mappings.
-                    -- See `:help vim.lsp.*` for documentation on any of the below functions
                     local opts = { buffer = ev.buf }
 
                     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts, { desc = "go definition" })
@@ -47,8 +23,9 @@ return {
                     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts, { desc = "go implementation" })
                     vim.keymap.set('n', 'gI', vim.lsp.buf.type_definition, opts, { desc = "go type definition" })
                     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts, { desc = "hover" })
-                    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts, { desc =
-                    "add add workspace folder to buffer" })
+                    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts,
+                        { desc = "add workspace folder to buffer" })
+
                     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts,
                         { desc = "remove workspace folder from buffer" })
                     vim.keymap.set('n', '<leader>wl',
@@ -72,6 +49,18 @@ return {
                 vim.keymap.set("n", "<leader>ca", function()
                     require("tiny-code-action").code_action()
                 end, { noremap = true, silent = true, desc = "show code action" })
+            })
+        end
+    },
+    {
+        'nvimtools/none-ls.nvim',
+        config = function()
+            local null_ls = require("null-ls")
+
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.clang_format,
+                },
             })
         end
     }

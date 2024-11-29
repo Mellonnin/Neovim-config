@@ -35,34 +35,8 @@ return {
                 respect_selection_type = false,
                 search_method = 'cover',
                 -- Whether to disable showing non-error feedback
-                silent = true,
+                silent = false,
             })
         end
-    },
-    {
-        'echasnovski/mini.move',
-        version = '*',
-        config = function()
-            require('mini.move').setup({
-                mappings = {
-                    -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-                    left = '<M-h>',
-                    right = '<M-l>',
-                    down = '',
-                    up = '',
-
-                    -- Move current line in Normal mode
-                    line_left = '<M-h>',
-                    line_right = '<M-l>',
-                    line_down = '<M-j>',
-                    line_up = '<M-k>',
-                },
-
-                options = {
-                    -- Automatically reindent selection during linewise vertical move
-                    reindent_linewise = true,
-                },
-            })
-        end
-    },
+    }
 }

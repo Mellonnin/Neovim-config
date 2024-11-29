@@ -6,10 +6,9 @@
 ("n") J                 join linea sotto
 ("v") J                 sposta la riga sotto
 ("v") K                 sposta la riga sopra
-("v") H                 sposta la riga a sinistra
-("v") L                 sposta la riga a destra
+("v") <<                 sposta la riga a sinistra
+("v") >>                 sposta la riga a destra
 ("n") -                 ritorna al file explorer, nel file explorer va alla directory superiore
-("n") leader-sl         apre la lista dei mesaggi diagnostici della pagina con quickfix
 ("n") U                 redo changes
 ("n") %                 find the next bracket on this line matching or predecessor directive
 ("i") ctrl-o            in insert permette di avere un comando di normal solo una volta e poi ti porta in insert
@@ -36,6 +35,9 @@
 ("n") m/M               delete/yank/highlight/jump move to the end of the previous word/WORD (incluso)
 ("n") x
 ("n") X
+
+
+
 
 --cmp
 <C-cc>  close

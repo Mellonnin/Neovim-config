@@ -1,5 +1,4 @@
---h + s/w/g/v/l/k/c + n/p/a
---h + i + s/w/kc
+--h + s/w/g/v/l/k/c + n/p/a/i
 --s (end word)
 --w (start word)
 --g (pattern)
@@ -28,7 +27,7 @@ vim.keymap.set({ "n", "o", "x" }, "<leader>hcb", function() require 'hop'.hint_c
 }) end,{ desc = "hop char1 before cursor" })
 
 -- char1 cursor inline
-vim.keymap.set({ "n", "o", "x" }, "<leader>hic", function()
+vim.keymap.set({ "n", "o", "x" }, "<leader>hci", function()
     require 'hop'.hint_char1({ current_line_only = true })
 end,{ desc = "hop char1 cursor inline" })
 
@@ -52,7 +51,7 @@ vim.keymap.set({ "n", "o", "x" }, "<leader>hkb", function() require 'hop'.hint_c
 }) end,{ desc = "hop char2 before cursor" })
 
 -- char2 cursor inline
-vim.keymap.set({ "n", "o", "x" }, "<leader>hik", function()
+vim.keymap.set({ "n", "o", "x" }, "<leader>hki", function()
     require 'hop'.hint_char2({ current_line_only = true })
 end,{ desc = "hop char2 cursor inline" })
 
@@ -93,7 +92,7 @@ vim.keymap.set({ "n", "o", "x" }, "<leader>hwa", function()
 require 'hop'.hint_words() end, { desc="hop start word anywhere" })
 -- start word after cursor
 vim.keymap.set({ "n", "o", "x" }, "<leader>hwn", function()
-    require 'hop'.hint_wordk({ direction = require 'hop.hint'.HintDirection.AFTER_CURSOR })
+    require 'hop'.hint_words({ direction = require 'hop.hint'.HintDirection.AFTER_CURSOR })
 end, { desc="hop start word after cursor" })
 
 -- start word before cursor
@@ -111,23 +110,23 @@ end, { desc="hop start word inline" })
 --END WORD
 -- end word
 vim.keymap.set({ "n", "o", "x" }, "<leader>hsa", function()
-    require 'hop'.hint_lines_skip_whitespace({ hint_position = require 'hop.hint'.HintPosition.END })
+    require 'hop'.hint_words({ hint_position = require 'hop.hint'.HintPosition.END })
 end, { desc="hop end word anywhere" })
 
 -- end word after cursor
-vim.keymap.set({ "n", "o", "x" }, "<leader>hsn", function() require 'hop'.words({
+vim.keymap.set({ "n", "o", "x" }, "<leader>hsn", function() require 'hop'.hint_words({
     direction = require 'hop.hint'.HintDirection.after_cursor,
     hint_position = require 'hop.hint'.HintPosition.END,
 }) end, { desc="hop end word after cursor" })
 
 -- end word before cursor
-vim.keymap.set({ "n", "o", "x" }, "<leader>hsp", function() require 'hop'.words({
+vim.keymap.set({ "n", "o", "x" }, "<leader>hsp", function() require 'hop'.hint_words({
     direction = require 'hop.hint'.HintDirection.before_cursor,
     hint_position = require 'hop.hint'.HintPosition.END,
 }) end, { desc="hop end word before cursor" })
 
 -- end word inline
-vim.keymap.set({ "n", "o", "x" }, "<leader>his", function() require 'hop'.hint_lines_skip_whitespace({
+vim.keymap.set({ "n", "o", "x" }, "<leader>hsi", function() require 'hop'.hint_words({
     hint_position = require 'hop.hint'.HintPosition.END,
     current_line_only = true
 }) end, { desc="hop end word inline" })

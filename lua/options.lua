@@ -23,13 +23,13 @@ vim.opt.inccommand = 'split'
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
-vim.opt.colorcolumn = "183"
+vim.opt.colorcolumn = "157"
 
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.mouse = ''
 
-
+vim.diagnostic.config({ virtual_text = false })
 
 

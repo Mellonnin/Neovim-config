@@ -1,7 +1,8 @@
 return {
-    { "tpope/vim-fugitive", },
+    {"tpope/vim-fugitive", event = "VeryLazy",},
     {
         'lewis6991/gitsigns.nvim', ---???
+        event = "VeryLazy",
         opts = {
             signs = {
                 add = { text = '+' },
@@ -19,6 +20,7 @@ return {
             "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim",
         },
+        event = "VeryLazy",
         config = function()
             local neogit = require('neogit')
             neogit.setup {}
@@ -27,10 +29,12 @@ return {
     {
         'polarmutex/git-worktree.nvim', -----???
         version = '^2',
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" }
     },
     {
         'isakbm/gitgraph.nvim', --????
+        event = "VeryLazy",
         opts = {
             symbols = {
                 merge_commit = '',
@@ -76,15 +80,6 @@ return {
                 end,
             },
         },
---        keys = {
---            {
---                "<leader>gg",
---                function()
---                    require('gitgraph').draw({}, { all = true, max_count = 5000 })
---                end,
---                desc = "GitGraph - Draw",
---            },
---        },
     },
 
 }

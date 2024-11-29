@@ -39,17 +39,22 @@ return {
             pcall(require("telescope").load_extension, 'fzf')
             pcall(require("telescope").load_extension, 'ui-select')
 
-            vim.keymap.set("n", "<leader>fl", builtin.live_grep, { desc = 'Search word ' })
+            vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = 'Search word ' })
             vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Search current word' })
-            vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnostics' })
             vim.keymap.set('n', '<leader>ff', function() recent_file.recent_files({}) end,
-                { noremap = true, silent = true, desc='fuzzy finding in recent files'})
+                { noremap = true, silent = true, desc='fuzzy find recent files'})
 
-            vim.keymap.set('n', '<leader>fb', function()
+            vim.keymap.set('n', '<leader>fc', function()
                 builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
                     winblend = 10, previewer = false,
                 })
             end, { desc = 'Fuzzily search in current buffer' })
+            vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
+            vim.keymap.set('n', '<leader>fl', builtin.loclist, { desc = 'Search loclist' })
+            vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = 'Search jumplist' })
+            vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnostics' })
+            vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Search quickfix' })
         end
+
     },
 }
