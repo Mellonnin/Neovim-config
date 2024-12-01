@@ -6,8 +6,8 @@
 ("n") J                 join linea sotto
 ("v") J                 sposta la riga sotto
 ("v") K                 sposta la riga sopra
-("v") <<                 sposta la riga a sinistra
-("v") >>                 sposta la riga a destra
+("v") >>                sposta la riga a sinistra
+("v") <<                sposta la riga a destra
 ("n") -                 ritorna al file explorer, nel file explorer va alla directory superiore
 ("n") U                 redo changes
 ("n") %                 find the next bracket on this line matching or predecessor directive
@@ -39,58 +39,8 @@
 
 
 
---cmp
-<C-cc>  close
-<tab>   confirm
-<C-n>   select_next_item
-<C-p>   select_prev_item
 
-
---harpoon
-("n") leader-a      append to harpoon list
-("n") C-h           toggle harpoon menu
-("n") C-d           next appended item
-("n") C-f           prev appended item
-
-
---hop da implementare
-
-
--- quality of life
-("n")("v") sa     add surrounding cosa
-("n")("v") ds     delete surrounding
-("n")("v") sfr    find surrounding to the right
-("n")("v") sfl    find surrounding to the left
-("n")("v") sr     replace surrounding + i/a + cosa
-("n")      sj     toggle split/join between braches 
-
--- telescope
-
-'wild 	exact-match (quoted) 	Items that include wild
-^music 	prefix-exact-match 	Items that start with music
-.mp3$ 	suffix-exact-match 	Items that end with .mp3
-!fire 	inverse-exact-match 	Items that do not include fire
-!^music 	inverse-prefix-exact-match 	Items that do not start with music
-!.mp3$ 	inverse-suffix-exact-match 	Items that do not end with .mp3
-
-A single bar character term acts as an OR operator.
-
-("n") leader-ff     find file
-("n") leader-lg     live grep
-("n") leader-sg     grep string under cursor
-("n") leader-sd     search diagnostic messages
-("n") leader-/      search cuffer buffer
--- all'interno della finestra di telescope
-("n") gg/G 	        Select the top/bottom item 
-("n") H/M/L 	    Select top/Middle/bottom 
-("n") j/k 	        Next/previous 
-("i") <C-p>/<C-n> 	Previous/Next item
-("i")("n") <CR> 	Confirm selection
-("i")("n") <C-x> 	Go to file selection as a split
-("i")("n") <C-v> 	Go to file selection as a vsplit
-("i")("n") <C-t> 	Go to a file in a new tab
-
---treesitter in visual mode extend 
+--treesitter
 ("n")("v") d/c/y of     outer function 
 ("n")("v") d/c/y if     inner function
 ("n")("v") d/c/y os     outer class 
@@ -132,62 +82,9 @@ wwww  wwwww  ww www ww wwwwwwwww
 WWWW WWWWWWW WW WWWWWW WWWWWWWWWW
 ]]
 
-
 ("n") ] + o/i/ + (f,s,c,l,p) goto_next_start 
 ("n") ] + (f,s,c,l,p) + o/i  goto_next_end 
 ("n") [ + o/i/ + (f,s,c,l,p) goto_previous_start
 ("n") [ + (f,s,c,l,p) + o/i  goto_previous_end 
 ("n") ' + o/i/ + (f,s,c,l,p) goto_next
 ("n") ' + (f,s,c,l,p) + o/i  goto_previous
-
---trouble
-<leader>tt  Diagnostics
-<leader>tb  Buffer Diagnostics
-<leader>ts  Diagnostics Symbols 
-<leader>tl  LSP Definitions / references / ... 
-<leader>tl  Location List 
-<leader>tq  Quickfix List
-
--- undotree
-("n") leader u    undotree toggle{
-  j move next
-  k move prev
-  gj move2 parent
-  J move change next
-  K move change prev
-  invio conferma
-  q quit
-}
-
-
-
-
-
--- da implementare totalmente
--- git 
-("n") leader-gs     comando git
-("n") leader-gg     git graph
-
-
-
-
-
-
-
-
---debugger da implementare
-
-
---lsp 
-("n")("v") leader-ca       code action menu 
-("n") gd                   go definition
-("n") gD                   go declaration
-("n") gr                   go references
-("n") gi                   go implementation
-("n") leader-D             type definition
-("n") K                    piu' spiegazioni
-("n") leader-wa            add workspace folder al buffer
-("n") leader-wr            remove workspace folder dal buffer
-("n") leader-wl            lista tutti i workspace folder
-("n") leader-rn            rinomina parola sotto il cursore in tutti i buffer
-("n") leader-fo            format file

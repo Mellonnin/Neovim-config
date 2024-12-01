@@ -1,7 +1,7 @@
 return {
-    {'smoka7/hop.nvim', version = "*", opts = { keys = 'fjdksla;ghcmtuvnrixeozq[wzybp' }, config = function() require("hop").setup({}) end},
-    {"yaocccc/nvim-foldsign", event = 'CursorHold', config = function() require('nvim-foldsign').setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' }, } }) end},
-    {"rachartier/tiny-inline-diagnostic.nvim", event = "VeryLazy", priority = 1000, config = function() require('tiny-inline-diagnostic').setup() end},
+    { "yaocccc/nvim-foldsign", event = 'CursorHold', config = function() require('nvim-foldsign').setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' }, } }) end },
+    { "rachartier/tiny-inline-diagnostic.nvim", event = "VeryLazy", priority = 1000, config = function() require(
+        'tiny-inline-diagnostic').setup() end },
     {
         "tversteeg/registers.nvim",
         cmd = "Registers",

@@ -21,8 +21,8 @@ return {
                 mappings = {
                     add = 'sa',        -- Add surrounding in Visual modes
                     delete = 'sd',     -- Delete surrounding
-                    find = 'sfr',      -- Find surrounding (to the right)
-                    find_left = 'sfl', -- Find surrounding (to the left)
+                    find = 'sf',      -- Find surrounding (to the right)
+                    find_left = 'sl', -- Find surrounding (to the left)
                     replace = 'sr',    -- Replace surrounding
                     suffix_last = 'l', -- Suffix to search with "prev" method
                     suffix_next = 'n', -- Suffix to search with "next" method
