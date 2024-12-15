@@ -10,7 +10,7 @@
 ("v") <<                sposta la riga a destra
 ("n") -                 ritorna al file explorer, nel file explorer va alla directory superiore
 ("n") U                 redo changes
-("n") %                 find the next bracket on this line matching or predecessor directive
+("n") <tab>                 find the next bracket on this line matching or predecessor directive
 ("i") ctrl-o            in insert permette di avere un comando di normal solo una volta e poi ti porta in insert
 ("n") 0			        to the first character of the line. 
 ("n") _			        to the first non-blank character of the line.
@@ -33,11 +33,35 @@
 ("n") y/d/v E           delete/yank/highlight/jump next WORD (incluso)
 ("n") y/d/v E           delete/yank/highlight/jump next WORD (incluso)
 ("n") m/M               delete/yank/highlight/jump move to the end of the previous word/WORD (incluso)
-("n") x
-("n") X
+("n") x                 canc char 
+("n") X                 delete char
+("v") =                 indent highlighted 
+("n") (			        sentences backward 
+("n") )			        sentences forward
+("n") {			        paragraphs backward
+("n") }			        paragraphs forward 
+("n") ]]		        sections forward or to the next "{" in the first column 
+("n") ][		        sections forward or to the next '}' in the first column
+("n") [[		       	sections backward or to the previous "{" in the first column
+("n") []		       	sections backward or to the previous "}" in the first column
+-  		                lines upward, on the first non-blank character 
++		                lines downward, on the first non-blank character 
 
+-- da vedere e cambiare
+When a motion is not of the type you would like to use, you can force another
+type by using "v", "V" or CTRL-V just after the operator.
+Example: >
+	dj
+deletes two lines >
+	dvj
+deletes from the cursor position until the character below the cursor >
+	d<C-V>j
+deletes the character under the cursor and the character below the cursor. >
 
+|			To screen column [count] in the current line.
+			|exclusive| motion.  Ceci n'est pas une pipe.
 
+	|zf|	zf	define a fold
 
 
 --treesitter

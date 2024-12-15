@@ -8,16 +8,6 @@ CTRL-T		insert one shiftwidth of indent in current line
 CTRL-U		delete all entered characters in the current line
 CTRL-W		delete word before the cursor
 ==============================================================================
-2. Normal mode						*normal-index*
-CHAR	 any non-blank character
-WORD	 a sequence of non-blank characters
-N	 a number entered before the command
-{motion} a cursor movement command
-Nmove	 the text that is moved over with a {motion}
-SECTION	 a section that possibly starts with '}' instead of '{'
-note: 1 = cursor movement command; 2 = can be undone/redone
-tag		char	      note action in Normal mode	 
-------------------------------------------------------------------------------  
 CTRL-B		1             scroll N screens Backwards
 CTRL-C		              interrupt current (search) command
 CTRL-G		              display current file name and position
@@ -125,10 +115,6 @@ z{char}		              commands starting with 'z', see |z| below
 }		1                   cursor N paragraphs forward
 ~		2                   'tildeop' off: switch case of N characters under cursor and move the cursor N characters to the right
 ==============================================================================
-2.3 Square bracket commands					*[* *]*
-
-tag		char	      note action in Normal mode	 
-------------------------------------------------------------------------------  
 [ CTRL-I	    jump to first line in current and included files that contains the word under the cursor, start searching at beginning of current file
 [#		1       cursor to N previous unmatched #if, #else or #ifdef
 ['		1       cursor to previous lowercase mark, on first non-blank
@@ -196,7 +182,6 @@ gM		1           go to character at middle of the text line
 gn	  1,2         find the next match with the last used search pattern and Visually select it
 go		1           cursor to byte N in the buffer
 ["x]gp		2       put the text [from register x] after the cursor N times, leave the cursor after it
-gu{motion}	2     make Nmove text lowercase
 gv		            reselect the previous Visual area
 gx		            execute application for file name under the cursor (only with |netrw| plugin)
 g~{motion}	2     swap case for Nmove text
@@ -369,7 +354,6 @@ x		      2   delete the highlighted area
 |:cbelow|	:cbel[ow]	go to error below current line
 |:cbottom|	:cbo[ttom]	scroll to the bottom of the quickfix window
 |:cbuffer|	:cb[uffer]	parse error messages and jump to first error
-|:cc|		:cc		go to specific error
 |:cclose|	:ccl[ose]	close quickfix window
 |:cd|		:cd		change directory
 |:cdo|		:cdo		execute command in each valid error list entry

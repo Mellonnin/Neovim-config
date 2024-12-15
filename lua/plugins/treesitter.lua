@@ -1,114 +1,55 @@
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
+    { "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function() local configs = require("nvim-treesitter.configs") configs.setup({
-            auto_install = true,
-            ensure_installed = { "typescript", "javascript" },
-            highlight = { enable = true },
-            indent = { enable = true },
-        }) end
+        config = function()
+            local configs = require("nvim-treesitter.configs")
+            configs.setup({
+                auto_install = true,
+                ensure_installed = { "typescript", "javascript" },
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end
     },
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+    { "nvim-treesitter/nvim-treesitter-textobjects",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
+            local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+            -- ensure ; goes forward and , goes backward regardless of the last direction
+            vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+            vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
             require "nvim-treesitter.configs".setup({
                 textobjects = {
                     select = {
                         enable = true,
                         include_surrounding_whitespace = true,
                         lookahead = true,
-                        keymaps = {
-                            ["of"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                            ["os"] = "@class.outer",
-                            ["is"] = "@class.inner",
-                            ["oc"] = "@conditional.outer",
-                            ["ic"] = "@conditional.inner",
-                            ["ol"] = "@loop.outer",
-                            ["il"] = "@loop.inner",
-                            ["op"] = "@parameter.outer",
-                            ["ip"] = "@parameter.inner",
+                        keymaps = {["af"] = "@function.outer", ["if"] = "@function.inner", ["as"] = "@class.outer", ["is"] = "@class.inner", ["ac"] = "@conditional.outer", ["ic"] = "@conditional.inner", ["al"] = "@loop.outer", ["il"] = "@loop.inner", ["ap"] = "@parameter.outer", ["ip"] = "@parameter.inner",},
+                    },
+                    move = {
+                        enable = true,
+                        set_jumps = true,
+                        goto_next_start = {["]af"] = "@function.outer", ["]if"] = "@function.inner", ["]as"] = "@class.outer", ["]is"] = "@class.inner", ["]ac"] = "@conditional.outer", ["]ic"] = "@conditional.inner", ["]al"] = "@loop.outer", ["]il"] = "@loop.inner", ["]ap"] = "@parameter.outer", ["]ip"] = "@parameter.inner",},
+                        goto_next_end = {["]fa"] = "@function.outer", ["]fi"] = "@function.inner", ["]sa"] = "@class.outer", ["]si"] = "@class.inner", ["]ca"] = "@conditional.outer", ["]ci"] = "@conditional.inner", ["]la"] = "@loop.outer", ["]li"] = "@loop.inner", ["]pa"] = "@parameter.outer", ["]pi"] = "@parameter.inner",},
+                        goto_previous_start = {["[af"] = "@function.outer", ["[if"] = "@function.inner", ["[as"] = "@class.outer", ["[is"] = "@class.inner", ["[ac"] = "@conditional.outer", ["[ic"] = "@conditional.inner", ["[al"] = "@loop.outer", ["[il"] = "@loop.inner", ["[ap"] = "@parameter.outer", ["[ip"] = "@parameter.inner",},
+                        goto_previous_end = {["[fa"] = "@function.outer", ["[fi"] = "@function.inner", ["[sa"] = "@class.outer", ["[si"] = "@clasj.inner", ["[ca"] = "@conditional.outer", ["[ci"] = "@conditional.inner", ["[la"] = "@loop.outer", ["[li"] = "@loop.inner", ["[pa"] = "@parameter.outer", ["[pi"] = "@parameter.inner",},
+                        goto_next = {["'af"] = "@function.outer", ["'if"] = "@function.inner", ["'as"] = "@clajs.outer", ["'is"] = "@class.inner", ["'ac"] = "@conditional.outer", ["'ic"] = "@conditional.inner", ["'al"] = "@loop.outer", ["'il"] = "@loop.inner", ["'ap"] = "@parameter.outer", ["'ip"] = "@parameter.inner",},
+                        goto_previous = {
+                            ["'fa"] = "@function.outer", ["'fi"] = "@function.inner",
+                            ["'sa"] = "@class.outer", ["'si"] = "@class.inner",
+                            ["'ca"] = "@conditional.outer", ["'ci"] = "@conditional.inner",
+                            ["'la"] = "@loop.outer", ["'li"] = "@loop.inner",
+                            ["'pa"] = "@parameter.outer", ["'pi"] = "@parameter.inner",
                         },
-                    }
+                    },
+                    swap = {
+                        enable = true,
+                        swap_next = {["<leader>m"] = "@parameter.inner",},
+                        swap_previous = {["<leader>M"] = "@parameter.inner",},
+                    },
                 },
-                {
-                    goto_next_start = {
-                        ["]of"] = "@function.outer",
-                        ["]if"] = "@function.inner",
-                        ["]os"] = "@class.outer",
-                        ["]is"] = "@class.inner",
-                        ["]oc"] = "@conditional.outer",
-                        ["]ic"] = "@conditional.inner",
-                        ["]ol"] = "@loop.outer",
-                        ["]il"] = "@loop.inner",
-                        ["]op"] = "@parameter.outer",
-                        ["]ip"] = "@parameter.inner",
-                    },
-                    goto_next_end = {
-                        ["]fo"] = "@function.outer",
-                        ["]fi"] = "@function.inner",
-                        ["]so"] = "@class.outer",
-                        ["]si"] = "@class.inner",
-                        ["]co"] = "@conditional.outer",
-                        ["]ci"] = "@conditional.inner",
-                        ["]lo"] = "@loop.outer",
-                        ["]li"] = "@loop.inner",
-                        ["]po"] = "@parameter.outer",
-                        ["]pi"] = "@parameter.inner",
-                    },
-                    goto_previous_start = {
-                        ["[of"] = "@function.outer",
-                        ["[if"] = "@function.inner",
-                        ["[os"] = "@class.outer",
-                        ["[is"] = "@class.inner",
-                        ["[oc"] = "@conditional.outer",
-                        ["[ic"] = "@conditional.inner",
-                        ["[ol"] = "@loop.outer",
-                        ["[il"] = "@loop.inner",
-                        ["[op"] = "@parameter.outer",
-                        ["[ip"] = "@parameter.inner",
-                    },
-                    goto_previous_end = {
-                        ["[fo"] = "@function.outer",
-                        ["[fi"] = "@function.inner",
-                        ["[so"] = "@class.outer",
-                        ["[si"] = "@clasj.inner",
-                        ["[ci"] = "@conditional.outer",
-                        ["[co"] = "@conditional.inner",
-                        ["[lo"] = "@loop.outer",
-                        ["[li"] = "@loop.inner",
-                        ["[po"] = "@parameter.outer",
-                        ["[pi"] = "@parameter.inner",
-                    },
-                    goto_next = {
-                        ["'of"] = "@function.outer",
-                        ["'if"] = "@function.inner",
-                        ["'os"] = "@clajs.outer",
-                        ["'is"] = "@class.inner",
-                        ["'oc"] = "@conditional.outer",
-                        ["'ic"] = "@conditional.inner",
-                        ["'ol"] = "@loop.outer",
-                        ["'il"] = "@loop.inner",
-                        ["'op"] = "@parameter.outer",
-                        ["'ip"] = "@parameter.inner",
-                    },
-                    goto_previous = {
-                        ["'fo"] = "@function.outer",
-                        ["'fi"] = "@function.inner",
-                        ["'so"] = "@class.outer",
-                        ["'si"] = "@class.inner",
-                        ["'co"] = "@conditional.outer",
-                        ["'ci"] = "@conditional.inner",
-                        ["'lo"] = "@loop.outer",
-                        ["'li"] = "@loop.inner",
-                        ["'po"] = "@parameter.outer",
-                        ["'pi"] = "@parameter.inner",
-                    },
-                }
             })
         end
     }

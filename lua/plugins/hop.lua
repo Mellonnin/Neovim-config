@@ -4,7 +4,6 @@ return {
     opts = { keys = 'fjdksla;ghcmtuvnrixeozq[wzy\'\\p' },
     config = function()
         require("hop").setup({})
-
         -- s/w/g/v/l/k/c + n/p/a/i
         --o (end word)
         --r (start word)
@@ -17,7 +16,6 @@ return {
         --a (after cursor)
         --p (before cursor)
         --e (anywhere)
-        -- NO w f g z s p d y
         --CHAR1 SECTION 4
         -- char1
         vim.keymap.set({ "n", "o", "x" }, "<leader>ce", function()
