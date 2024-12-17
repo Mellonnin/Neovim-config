@@ -28,7 +28,7 @@ return {
     vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, {desc="harpoon add list"})
     vim.keymap.set("n", "<leader>fh", function() toggle_telescope(harpoon:list()) end,
     {desc = "harpoon list inside telescope"})
-    vim.keymap.set("n", "<leader>z", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+    vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
     {desc="toggle harpoon menu"})
     vim.keymap.set("n", "<C-e>", function() harpoon:list():prev() end,{remap=true,desc="prev harpoon item"})
     vim.keymap.set("n", "<C-r>", function() harpoon:list():next() end, {remap=true,desc="next harpoon item"})

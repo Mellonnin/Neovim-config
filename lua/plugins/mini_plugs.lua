@@ -7,6 +7,7 @@ return {
                 highlight = 10000000,
                 idle_stop = 10000000,
             },
+            silent = true, -- Whether to disable showing non-error feedback
         }) end
     },
     {"echasnovski/mini.splitjoin", version = "*", config = function() require("mini.splitjoin").setup({ mappings = { toggle = 'sj', split = '', join = '', }, detect = { brackets = nil, separator = ',', exclude_regions = nil, }, split = { hooks_pre = {}, hooks_post = {}, }, join = { hooks_pre = {}, hooks_post = {}, }, }) end },
@@ -37,7 +38,7 @@ return {
                 -- - Place surroundings on each line in blockwise mode.
                 respect_selection_type = false,
                 search_method = 'cover',
-                silent = false, -- Whether to disable showing non-error feedback
+                silent = true, -- Whether to disable showing non-error feedback
             })
         end
     }

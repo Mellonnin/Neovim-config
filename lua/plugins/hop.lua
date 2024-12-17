@@ -75,12 +75,12 @@ return {
 
         --LINE SECTION 2
         --vertical line
-        vim.keymap.set({ "n", "o", "x" }, "<leader>hv", function()
+        vim.keymap.set({ "n", "o", "x" }, "<leader>v", function()
             require 'hop'.hint_vertical()
         end, { desc = "hop vertical" })
 
         --start line
-        vim.keymap.set({ "n", "o", "x" }, "<leader>hl", function()
+        vim.keymap.set({ "n", "o", "x" }, "<leader>l", function()
             require 'hop'.hint_lines_skip_whitespace()
         end, { desc = "hop line start" })
 

@@ -1,10 +1,3 @@
-
-							*_*
-_  <underscore>		[count] - 1 lines downward, on the first non-blank
-			character |linewise|.
-
-==============================================================================
-
 							*'[* *`[*
 '[  `[			To the first character of the previously changed
 			or yanked text.
@@ -20,7 +13,7 @@ _  <underscore>		[count] - 1 lines downward, on the first non-blank
 			be able to define the block).
 
 							*'>* *`>*
-'>  `>			To the last line or character of the last selected
++>  `>			To the last line or character of the last selected
 			Visual area in the current buffer.  For block mode it
 			may also be the first character of the last line (to
 			be able to define the block).  Note that 'selection'

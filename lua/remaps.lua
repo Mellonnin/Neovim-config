@@ -1,7 +1,7 @@
 -- actual remaps
 vim.g.mapleader = " "
 -- best remap ever
-vim.keymap.set("i", "<C-CR>", "<Right>")
+vim.keymap.set("i", "<C-l>", "<Right>")
 -- search
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", {desc = "end highlight search" })
 vim.keymap.set("n", "n", "nzzzv",{desc = "vai al prossimo termine" })
@@ -13,6 +13,7 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", {desc = "move hightlighted line dow
 vim.keymap.set("n", "<C-q>", "<C-d>zz", {desc = "giu meta schermo" })
 vim.keymap.set("n", "<C-w>", "<C-u>zz", {desc = "su meta schermo" })
 vim.keymap.set("n", "U", "<C-r>", {desc = "vai al cambiamento successivo" })
+
 --movement
 vim.keymap.set({ "n", "v" }, "m", "ge",{desc="move to the end of the previous word"})
 vim.keymap.set({ "n", "v" }, "M", "gE",{desc="move to the end of the previous WORD"})
@@ -21,7 +22,8 @@ vim.keymap.set({ "n", "v" }, "gj", "G",{desc="buffer bottom"})
 vim.keymap.set({ "n", "v" }, "gh","0",{desc="line begin"})
 vim.keymap.set({ "n", "v" }, "_", "-",{desc="line up on first non-blank"})
 -- inizia a cambiare la parola su cui ero sopra
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "inizia a cambiare la parola su cui ero sopra" })
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "inizia a cambiare la parola su cui ero sopra" })
 --clipboard
 --paste
 vim.keymap.set("x", "<C-p>", [["_dP]], { desc = "continua ad incollare quello nel buffer senza perdere" })
