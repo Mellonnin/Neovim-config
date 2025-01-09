@@ -2,16 +2,12 @@ return {
     {
         "echasnovski/mini.jump",
         version = "*",
-        config = function() require("mini.jump").setup({
-            delay = {
-                highlight = 10000000,
-                idle_stop = 10000000,
-            },
-            silent = true, -- Whether to disable showing non-error feedback
-        }) end
+        config = function()
+            require("mini.jump").setup({ delay = { highlight = 10000000, idle_stop = 10000000, }, silent = true, })
+        end,
     },
-    {"echasnovski/mini.splitjoin", version = "*", config = function() require("mini.splitjoin").setup({ mappings = { toggle = 'sj', split = '', join = '', }, detect = { brackets = nil, separator = ',', exclude_regions = nil, }, split = { hooks_pre = {}, hooks_post = {}, }, join = { hooks_pre = {}, hooks_post = {}, }, }) end },
-    {"echasnovski/mini.surround",
+    {
+        "echasnovski/mini.surround",
         version = "*",
         config = function()
             require("mini.surround").setup({
@@ -28,18 +24,15 @@ return {
                     ["'"] = { output = { left = "'", right = "'" } },
                 },
                 mappings = {
-                    add = 'sa',     -- Add surrounding in Visual modes
-                    delete = 'sd',  -- Delete surrounding
-                    replace = 'sr', -- Replace surrounding
+                    add = '<leader>sa',     -- Add surrounding in Visual modes
+                    delete = '<leader>sd',  -- Delete surrounding
+                    replace = '<leader>sr', -- Replace surrounding
                 },
-                n_lines = 100,      -- Number of lines within which surrounding is searched
-                -- Whether to respect selection type:
-                -- - Place surroundings on separate lines in linewise mode.
-                -- - Place surroundings on each line in blockwise mode.
+                n_lines = 100,
                 respect_selection_type = false,
                 search_method = 'cover',
-                silent = true, -- Whether to disable showing non-error feedback
+                silent = true,
             })
         end
-    }
+    },
 }
