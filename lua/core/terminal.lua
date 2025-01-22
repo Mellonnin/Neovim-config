@@ -29,7 +29,14 @@ local function create_floating_window(opts)
     }
 
     -- Create the floating window
-    local win = vim.api.nvim_open_win(buf, true, win_config)
+    local win = vim.api.nvim_open_win(
+        buf,
+        true,
+        win_config
+    )
+
+    vim.cmd("startinsert")
+
 
     return { buf = buf, win = win }
 end
@@ -45,7 +52,6 @@ local toggle_terminal = function()
     end
 end
 
--- Example usage:
 -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
 vim.keymap.set({ "n", "t" }, "<leader>tt", toggle_terminal)

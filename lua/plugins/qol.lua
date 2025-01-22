@@ -5,7 +5,7 @@ return {
         cmd = "Registers",
         keys = {
             { "\"",    mode = { "n", "v" } },
-            { "<C-t>", mode = "i" }
+            { "<c-\'>", mode = "i" }
         },
         name = "registers",
         config = function()
@@ -38,33 +38,4 @@ return {
             })
         end
     },
-    {
-        "gbprod/yanky.nvim",
-        config = function()
-            require("yanky").setup(
-                {
-                    preserve_cursor_position = {
-                        enabled = true,
-                    },
-                    textobj = {
-                        enabled = true,
-                    },
-                    highlight = {
-                        on_put = false,
-                        on_yank = false,
-                        timer = 0,
-                    },
-                }
-            )
-
-            vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
-            vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-            vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-            vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-            vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-            vim.keymap.set("n", "]y", "<Plug>(YankyPreviousEntry)")
-            vim.keymap.set("n", "[y", "<Plug>(YankyNextEntry)")
-            vim.keymap.set({ "n", "v" }, "]p", function() require("yanky.textobj").last_put() end, {})
-        end
-    }
 }
