@@ -1,5 +1,5 @@
 return {
-        "stevearc/oil.nvim",
+        "stevear/oil.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             CustomOilBar = function()

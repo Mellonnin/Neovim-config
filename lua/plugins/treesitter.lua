@@ -29,7 +29,7 @@ return {
                 textobjects = {
                     select = {
                         enable = true,
-                        include_surrounding_whitespace = true,
+                        include_surrounding_whitespace = false,
                         lookahead = true,
                         keymaps = {
                             ["af"] = "@function.outer",
@@ -183,28 +183,14 @@ return {
                     swap = {
                         enable = true,
                         swap_next = {
-                            ["<leader>m"] = "@parameter.inner",
+                            [""] = "@parameter.inner",
                         },
                         swap_previous = {
-                            ["<leader>M"] = "@parameter.inner",
+                            [""] = "@parameter.inner",
                         },
                     },
                 },
             })
         end,
     },
-    {
-        "Wansmer/treesj",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
-        event = "VeryLazy",
-        config = function()
-            require("treesj").setup({
-                max_join_length = 10000,
-                use_default_keymaps = false,
-            })
-            vim.keymap.set("n", "<leader>sj", function() require("treesj").toggle({ split = { recursive = true } }) end)
-        end,
-    }
 }

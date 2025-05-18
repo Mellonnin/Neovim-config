@@ -1,5 +1,5 @@
 return {
-    { "yaocccc/nvim-foldsign", event = "CursorHold", config = function() require("nvim-foldsign").setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' } } }) end },
+    { "yaocccc/nvim-foldsign", event = "CursorHold", config = function() require("nvim-foldsign") .setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' } } }) end },
     {
         "tversteeg/registers.nvim",
         cmd = "Registers",
