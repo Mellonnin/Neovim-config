@@ -55,13 +55,11 @@ return {
         local recent_file = require("telescope").load_extension("recent-files")
         local pathogen = require("telescope").load_extension("pathogen")
 
-        vim.keymap.set("n", "<leader>fk", function() pathogen.find_files({ cwd = utils.buffer_dir() }) end,
-            { desc = "search files in cdw" })
+        vim.keymap.set("n", "<leader>fk", function() pathogen.find_files({ cwd = utils.buffer_dir() }) end, { desc = "search files in cdw" })
         vim.keymap.set("n", "<leader>fs", pathogen.grep_string, { desc = "search current word" })
         vim.keymap.set("n", "<leader>fw", pathogen.live_grep, { desc = "search word " })
         vim.keymap.set("n", "<leader>ff", pathogen.find_files, { desc = "search files" })
-        vim.keymap.set("n", "<leader>fr",
-            function() recent_file.recent_files({ require("telescope.themes").get_ivy {} }) end)
+        vim.keymap.set("n", "<leader>fr", function() recent_file.recent_files({ require("telescope.themes").get_ivy {} }) end)
         vim.keymap.set("n", "<leader>fe",
             function() builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown { previewer = false }) end,
             { desc = "fuzzily search in current buffer" })

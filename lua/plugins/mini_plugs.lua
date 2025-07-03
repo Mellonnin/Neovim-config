@@ -64,17 +64,9 @@ return {
                     exclude_regions = nil,
                 },
 
-                split = {
-                    hooks_pre = {},
-                    hooks_post = {},
-                },
+                split = {hooks_pre = {}, hooks_post = {},},
 
-                join = {
-                    hooks_pre = {
-
-                    },
-                    hooks_post = {},
-                },
+                join = {hooks_pre = {}, hooks_post = {},},
             })
         end
     },

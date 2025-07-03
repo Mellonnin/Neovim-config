@@ -181,7 +181,7 @@ return {
                         },
                     },
                     swap = {
-                        enable = true,
+                        enable = false,
                         swap_next = {
                             [""] = "@parameter.inner",
                         },
@@ -193,4 +193,5 @@ return {
             })
         end,
     },
+    {"wurli/contextindent.nvim", opts = { pattern = "*" }, dependencies = { "nvim-treesitter/nvim-treesitter" },}
 }
