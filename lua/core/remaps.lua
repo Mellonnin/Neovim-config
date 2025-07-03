@@ -44,7 +44,6 @@ vim.keymap.set({"n","v"}, "L", "g_", { desc = "go to non blank end of the line" 
 vim.keymap.set({"n","v"}, "H", "^", { desc = "go to non blank start of the line" })
 vim.keymap.set({"n","v"}, "^", "0", { desc = "line begin" })
 
-vim.keymap.set({"n"}, "K", "i<CR><esc>g;i", { desc = "idfk"})
 
 -- fast indent/dedenting
 vim.keymap.set({"n","v"}, "<", "<<")
