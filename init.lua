@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 vim.g.mapleader = " "
 vim.opt.mouse = ''
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -16,4 +17,5 @@ require("lazy").setup("plugins")
 require("core.options")
 require("core.remaps")
 require("core.terminal")
+require("core.lsp")
 require("ui.statusline")

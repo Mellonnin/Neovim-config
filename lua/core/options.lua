@@ -1,8 +1,9 @@
 vim.opt.swapfile = false
+vim.opt.winborder = "rounded"
 vim.opt.backup = false
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 3
+vim.opt.softtabstop = 3
+vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
@@ -15,7 +16,7 @@ vim.opt.scrolloff = 10
 vim.opt.updatetime = 50
 vim.opt.inccommand = 'split' -- Preview substitutions live, as you type!
 vim.opt.hlsearch = true -- Set highlight on search, but clear on pressing <Esc> in normal mode                                                             
-vim.opt.colorcolumn = "157"
+vim.opt.colorcolumn = "189"
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.mouse = ''
@@ -51,7 +52,7 @@ end
 local keys = { "d", "x", "c", "s", "C", "S", "X","D" } -- Define a list of keys to apply the smart delete functionality
 -- Set keymaps for both normal and visual modes
 for _, key in pairs(keys) do
- vim.keymap.set({ "n", "v" }, key, function()
+ vim.keyamps.set({ "n", "v" }, key, function()
   return smart_delete(key)
  end, { noremap = true, expr = true, desc = "Smart delete" })
 end

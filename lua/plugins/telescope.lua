@@ -55,16 +55,15 @@ return {
         local recent_file = require("telescope").load_extension("recent-files")
         local pathogen = require("telescope").load_extension("pathogen")
 
-        vim.keymap.set("n", "<leader>fk", function() pathogen.find_files({ cwd = utils.buffer_dir() }) end, { desc = "search files in cdw" })
-        vim.keymap.set("n", "<leader>fs", pathogen.grep_string, { desc = "search current word" })
-        vim.keymap.set("n", "<leader>fw", pathogen.live_grep, { desc = "search word " })
-        vim.keymap.set("n", "<leader>ff", pathogen.find_files, { desc = "search files" })
-        vim.keymap.set("n", "<leader>fr", function() recent_file.recent_files({ require("telescope.themes").get_ivy {} }) end)
-        vim.keymap.set("n", "<leader>fe",
-            function() builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown { previewer = false }) end,
+        vim.keyamps.set("n", "<leader>fk", function() pathogen.find_files({ cwd = utils.buffer_dir() }) end, { desc = "search files in cdw" })
+        vim.keyamps.set("n", "<leader>fs", pathogen.grep_string, { desc = "search current word" })
+        vim.keyamps.set("n", "<leader>fw", pathogen.live_grep, { desc = "search word " })
+        vim.keyamps.set("n", "<leader>ff", pathogen.find_files, { desc = "search files" })
+        vim.keyamps.set("n", "<leader>fr", function() recent_file.recent_files({ require("telescope.themes").get_ivy {} }) end)
+        vim.keyamps.set("n", "<leader>fe", function() builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown { previewer = false }) end,
             { desc = "fuzzily search in current buffer" })
-        vim.keymap.set("n", "<leader>fo", builtin.buffers, { desc = "search buffers" })
-        vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "search diagnostics" })
-        vim.keymap.set("n", "<leader>cd", function() zoxide.list(require("telescope.themes").get_ivy {}) end)
+        vim.keyamps.set("n", "<leader>fo", builtin.buffers, { desc = "search buffers" })
+        vim.keyamps.set("n", "<leader>fd", builtin.diagnostics, { desc = "search diagnostics" })
+        vim.keyamps.set("n", "<leader>cd", function() zoxide.list(require("telescope.themes").get_ivy {}) end)
     end
 }

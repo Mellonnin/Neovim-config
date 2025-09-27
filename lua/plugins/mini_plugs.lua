@@ -27,12 +27,12 @@ return {
                     ["'"] = { output = { left = "'", right = "'" } },
                 },
                 mappings = {
-                    add = '<leader>sa',     -- Add surrounding in Visual modes
-                    delete = '<leader>sd',  -- Delete surrounding
-                    replace = '<leader>sr', -- Replace surrounding
+                    add = 'sa',     -- Add surrounding in Visual modes
+                    delete = 'sd',  -- Delete surrounding
+                    replace = 'sr', -- Replace surrounding
                 },
                 n_lines = 100,
-                respect_selection_type = false,
+                respect_selection_type = true,
                 search_method = 'cover',
                 silent = true,
             })
@@ -44,7 +44,7 @@ return {
         config = function()
             require("mini.splitjoin").setup({
                 mappings = {
-                    toggle = 'gs',
+                    toggle = 'ss',
                     split = '',
                     join = '',
                 },

@@ -1,5 +1,6 @@
 return {
-    { "yaocccc/nvim-foldsign", event = "CursorHold", config = function() require("nvim-foldsign").setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' } } }) end },
+    { "yaocccc/nvim-foldsign", event = "CursorHold",
+      config = function() require("nvim-foldsign").setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' } } }) end },
     {
         "tversteeg/registers.nvim",
         cmd = "Registers",
@@ -37,5 +38,13 @@ return {
                 },
             })
         end
-    },
+   },
+   { "phanen/vbi.nvim" },
+   {
+      "leath-dub/snipe.nvim",
+      keys = {
+         {"gb", function () require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu"}
+      },
+      opts = {}
+   }
 }
