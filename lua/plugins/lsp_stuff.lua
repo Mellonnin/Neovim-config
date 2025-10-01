@@ -11,6 +11,44 @@ return {
       "williamboman/mason.nvim",
       config = function() require("mason").setup() end
    },
+
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = { "hrsh7th/cmp-cmdline", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", },
+        config = function()
+            local cmp = require("cmp")
+            cmp.setup({
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-z>"] = cmp.mapping.close(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+                    ["<tab>"] = cmp.mapping.confirm({ select = true }),
+                    ["<n>"] = cmp.mapping.select_next_item(),
+                    ["<m>"] = cmp.mapping.select_prev_item(),
+
+
+                    -- commands in completion mode (see |popupmenu-keys|)
+                    -- |complete_CTRL-E| CTRL-E	stop completion and go back to original text
+                    -- |complete_CTRL-Y| CTRL-Y	accept selected match and stop completion
+                    -- 		CTRL-L		insert one character from the current match
+                    -- 		<CR>		insert currently selected match
+                    -- 		<BS>		delete one character and redo search
+                    -- 		CTRL-H		same as <BS>
+                    -- 		<Up>		select the previous match
+                    -- 		<Down>		select the next match
+                    -- 		<PageUp>	select a match several entries back
+                    -- 		<PageDown>	select a match several entries forward
+                    -- 		other		stop completion and insert the typed character
+
+
+                }),
+                sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } })
+            })
+        end
+    },
    {
       "michaelb/sniprun",
       branch = "master",
@@ -26,51 +64,3 @@ return {
       end,
    },
 }
---     -- { "L3MON4D3/LuaSnip", dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" } },
---     -- {
---     --     "hrsh7th/nvim-cmp",
---     --     dependencies = { "hrsh7th/cmp-cmdline", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", },
---     --     config = function()
---     --         local cmp = require("cmp")
---     --         require("luasnip.loaders.from_vscode").lazy_load()
---     --         cmp.setup({
---     --             snippet = { expand = function(args) require("luasnip").lsp_expand(args.body) end, },
---     --             window = {
---     --                 completion = cmp.config.window.bordered(),
---     --                 documentation = cmp.config.window.bordered(),
---     --             },
---     --             mapping = cmp.mapping.preset.insert({
---     --                 ["<C-z>"] = cmp.mapping.close(),
---     --                 ["<CR>"] = cmp.mapping.confirm({ select = false }),
---     --                 ["<tab>"] = cmp.mapping.confirm({ select = true }),
---     --                 ["<n>"] = cmp.mapping.select_next_item(),
---     --                 ["<m>"] = cmp.mapping.select_prev_item(),
---     --
---     --
---     --                 -- commands in completion mode (see |popupmenu-keys|)
---     --                 -- |complete_CTRL-E| CTRL-E	stop completion and go back to original text
---     --                 -- |complete_CTRL-Y| CTRL-Y	accept selected match and stop completion
---     --                 -- 		CTRL-L		insert one character from the current match
---     --                 -- 		<CR>		insert currently selected match
---     --                 -- 		<BS>		delete one character and redo search
---     --                 -- 		CTRL-H		same as <BS>
---     --                 -- 		<Up>		select the previous match
---     --                 -- 		<Down>		select the next match
---     --                 -- 		<PageUp>	select a match several entries back
---     --                 -- 		<PageDown>	select a match several entries forward
---     --                 -- 		other		stop completion and insert the typed character
---     --
---     --
---     --             }),
---     --             sources = cmp.config.sources({ { name = "nvim_lsp" }, { name = "luasnip" } }, { { name = "buffer" } })
---     --         })
---     --     end
---     -- },
---     -- {
---     --     "nvimtools/none-ls.nvim",
---     --     config = function()
---     --         local null_ls = require("null-ls")
---     --         null_ls.setup({ sources = { null_ls.builtins.formatting.clang_format, }, })
---     --     end
---     -- },
---

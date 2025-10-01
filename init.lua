@@ -19,3 +19,4 @@ require("core.remaps")
 require("core.terminal")
 require("core.lsp")
 require("ui.statusline")
+

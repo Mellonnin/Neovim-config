@@ -52,7 +52,7 @@ end
 local keys = { "d", "x", "c", "s", "C", "S", "X","D" } -- Define a list of keys to apply the smart delete functionality
 -- Set keymaps for both normal and visual modes
 for _, key in pairs(keys) do
- vim.keyamps.set({ "n", "v" }, key, function()
+ vim.keymap.set({ "n", "v" }, key, function()
   return smart_delete(key)
  end, { noremap = true, expr = true, desc = "Smart delete" })
 end
