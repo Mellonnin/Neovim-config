@@ -14,10 +14,6 @@ D.lazy_require = function(require_path)
 end
 
 D.get_full_path = function(root_dir, value)
-    if vim.loop.os_uname().sysname == "Windows_NT" then
-        return root_dir .. "\\" .. value
-    end
-
     return root_dir .. "/" .. value
 end
 
@@ -139,11 +135,11 @@ end
 local function get_branch()
     local branch = vim.fn.systemlist('git branch --show')
     if branch[1] == nil then
-        branch = ""
+        branch[1] = ""
         return branch
     end
     if string.find(branch[1], 'fatal') then
-        branch = ""
+        branch[1] = ""
         return branch
     end
     if branch ~= nil then
@@ -159,10 +155,12 @@ function _G.statusline()
         " ",
         "%m%r",
         "  ",
+         -- recipe.statusline,
         get_branch(),
         "%=",
         setup_diagnostics(),
         "  ",
+        -- require("argmark").get_display_text,
         "[",
         harpoon_status(),
         "]",

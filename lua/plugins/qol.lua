@@ -1,8 +1,5 @@
 return {
-    { "yaocccc/nvim-foldsign", event = "CursorHold",
-      config = function() require("nvim-foldsign").setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' } } }) end },
-    {
-        "tversteeg/registers.nvim",
+    { "tversteeg/registers.nvim",
         cmd = "Registers",
         keys = {
             { "\"",     mode = { "n", "v" } },
@@ -39,12 +36,24 @@ return {
             })
         end
    },
+   {"yaocccc/nvim-foldsign", event = "CursorHold", config = function() require("nvim-foldsign").setup({ offset = -2, foldsigns = { open = '-', close = '+', seps = { '│', '┃' } } }) end },
+   {"rachartier/tiny-inline-diagnostic.nvim",
+      event = "VeryLazy",
+      priority = 1000,
+      config = function ()
+         require("tiny-inline-diagnostic").setup()
+         vim.diagnostic.config({virtual_text= false})
+      end,
+   },
    { "phanen/vbi.nvim" },
-   {
-      "leath-dub/snipe.nvim",
-      keys = {
-         {"gb", function () require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu"}
-      },
-      opts = {}
-   }
+   {"leath-dub/snipe.nvim", keys = {{"gb", function () require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu"} }, opts = {}},
+   { "toppair/peek.nvim",
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
+    config = function()
+        require("peek").setup()
+        vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+        vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+    end,
+   },
 }

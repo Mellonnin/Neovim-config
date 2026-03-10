@@ -1,9 +1,13 @@
 -- best remap ever
 vim.keymap.set({ "i", "c","t" }, "<C-l>", "<Right>")
 vim.keymap.set({ "i", "c","t" }, "<C-f>", "<del>", {noremap=true})
-vim.keymap.set({ "i", "c","t" }, "<C-e>", "<C-o>dw", {noremap=true, desc = "delete word after the cursor"})
+vim.keymap.set({ "i", "c","t" }, "<C-e>", "<C-o>w<C-o>dw", {noremap=true, desc = "delete word after the cursor"})
 vim.keymap.set({ "i", "c","t" }, "<C-a>", "<c-o>D", {noremap=true, desc = "delete all characters after the cursor"})
+
 -- CTRL-H delete	
+-- CTRL-M newline	
+-- CTRL-i insert tab	
+-- CTRL-G+ j/k go down/up
 -- CTRL-U		delete all entered characters in tcurrent line
 -- CTRL-W		delete word before the cursor
 -- :tmap  :tnoremap :tunmap    Terminal
@@ -17,12 +21,20 @@ vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<CR>", { desc = "end highlight sear
 vim.keymap.set({"n","v"}, "<C-n>", "nzzzv", { noremap=true, desc = "vai al prossimo termine" })
 vim.keymap.set({"n","v"}, "<C-m>", "Nzzzv", { noremap= true,desc = "vai al termine precedente" })
 
+vim.keymap.set('x', '<C-/>', '<C-\\><C-n>`</\\%V', { desc = 'Search forward within visual selection' })
+vim.keymap.set('x', '<C-?>', '<C-\\><C-n>`>?\\%V', { desc = 'Search backward within visual selection' })
+
+
 vim.keymap.set({"n","v"}, "m", "ge", { noremap = true,desc = "move to the end of the previous word" })
 vim.keymap.set({"n","v"}, "M", "gE", { noremap = true,desc = "move to the end of the previous WORD" })
 vim.keymap.set({"n","v"}, "n", "b" , {noremap = true,desc = "move to the begin of the previous word" })
 vim.keymap.set({"n","v"}, "N", "B", { noremap = true,desc = "move to the begin of the previous WORD" })
-
 vim.keymap.set({"n","v"}, "gm", "gN", { desc = "find the prev match with the last used search pattern and Visually select it" })
+
+vim.keymap.set({"n"}, "<S-enter>", "T.i<enter><C-o>A", { noremap = true,desc = "" })
+vim.keymap.set({"i"}, "<S-enter>", "<esc>T.i<enter><C-o>A", { noremap = true,desc = "" })
+vim.keymap.set({"i"}, "<C-S-j>", "<esc>T.i<enter><C-o>A", { noremap = true,desc = "" })
+
 
 -- visual mode
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { desc = "move hightlighted line up" })
@@ -31,14 +43,11 @@ vim.keymap.set({"n","v"}, "gp", "`[v`]", { desc = "select previously pasted regi
 --normal mode
 vim.keymap.set({"n","v"}, "U", "<C-r>", { desc = "vai al cambiamento successivo" })
 
-vim.keymap.set({"n","v"}, "<C-j>", "<C-u>zz", { desc = "giu meta schermo" })
-vim.keymap.set({"n","v"}, "<C-k>", "<C-d>zz", { desc = "su meta schermo" })
-
-vim.keymap.set({"n","v"}, "<C-f>", "gf", { desc = "change file with name under cursor" })
+vim.keymap.set({"n","v"}, "<C-j>", "<C-d>zz", { desc = "giu meta schermo" })
+vim.keymap.set({"n","v"}, "<C-k>", "<C-u>zz", { desc = "su meta schermo" })
 
 vim.keymap.set({"n","v"}, "<C-a>", "g;", { desc = "changelist backwards" })
 vim.keymap.set({"n","v"}, "<C-s>", "g,", { desc = "changelist forward" })
-
 
 
 vim.keymap.set({"n","v"}, "L", "g_", { desc = "go to non blank end of the line" })
@@ -59,6 +68,9 @@ vim.keymap.set("x", "<C-c>", "gc", { remap = true })
 -- inizia a cambiare la parola su cui ero sopra
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],{desc = "substitute words over the cursor"})
 
+--quickfix
+vim.keymap.set("n", "<leader>qs", [[:cdo s//c/gc<Left><Left><Left><Left><Left>]],{desc = "quickfix select word to change"})
+
 --clipboard
 --paste
 vim.keymap.set({"n","v"}, "<leader>p", [["+p]], { desc = "paste nella clipboard di sistema" })
@@ -71,3 +83,16 @@ vim.keymap.set({"n","v"}, "Y", "y$", { desc = "yank dal cursore in poi" })
 --delete
 vim.keymap.set({"n","v"}, "<leader>d", [["_d]], { desc = "il delete non va nella clipboard di nvim" })
 vim.keymap.set({"n","v"}, "<leader>D", [["_D]], { desc = "delete dal cursore in poi senza andare nella clipboard di nvim" })
+
+
+--diagnostics
+vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
+
+vim.keymap.set({ "n", "x" }, "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
+   { desc = "Next Diagnostic" })
+vim.keymap.set({ "n", "x" }, "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
+   { desc = "Prev Diagnostic" })
+
+vim.keymap.set({ "n", "x" }, "<leader>ca", function() require("tiny-code-action").code_action() end,
+   { noremap = true, silent = true })

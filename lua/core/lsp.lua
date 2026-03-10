@@ -6,8 +6,8 @@ vim.lsp.enable({
    "pyrefly",
    "clangd",
    "elixir-ls",
+   "bash-language-server",
 })
-
 
 vim.diagnostic.config({
    -- virtual_lines = true,
@@ -34,16 +34,6 @@ vim.diagnostic.config({
 })
 
 -- diagnostics
-vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-
-
-vim.keymap.set({ "n", "x" }, "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
-   { desc = "Next Diagnostic" })
-vim.keymap.set({ "n", "x" }, "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
-   { desc = "Prev Diagnostic" })
-
-vim.keymap.set({ "n", "x" }, "<leader>ca", function() require("tiny-code-action").code_action() end,
-   { noremap = true, silent = true })
 
 
 vim.api.nvim_create_autocmd("LspAttach", {

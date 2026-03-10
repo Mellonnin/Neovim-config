@@ -30,6 +30,8 @@ return {
                         include_surrounding_whitespace = false,
                         lookahead = true,
                         keymaps = {
+                            ["aj"] = "@call.outer",
+                            ["ij"] = "@call.inner",
                             ["af"] = "@function.outer",
                             ["if"] = "@function.inner",
                             ["as"] = "@class.outer",
@@ -48,21 +50,23 @@ return {
                             ["ar"] = "@return.outer",
                         },
                         selection_modes = {
+                            ["@call.outer"] = "V",
+                            ["@call.inner"] = "v",
                             ["@function.outer"] = "V",
-                            ["@function.inner"] = "V",
+                            ["@function.inner"] = "v",
                             ["@class.outer"] = "V",
-                            ["@class.inner"] = "V",
+                            ["@class.inner"] = "v",
                             ["@conditional.outer"] = "V",
-                            ["@conditional.inner"] = "V",
+                            ["@conditional.inner"] = "v",
                             ["@loop.outer"] = "V",
-                            ["@loop.inner"] = "V",
+                            ["@loop.inner"] = "v",
                             ["@parameter.outer"] = "V",
-                            ["@parameter.inner"] = "V",
-                            ["@attribute.inner"] = "V",
+                            ["@parameter.inner"] = "v",
                             ["@attribute.outer"] = "V",
-                            ["@comment.inner"] = "V",
+                            ["@attribute.inner"] = "v",
+                            ["@comment.inner"] = "v",
                             ["@comment.outer"] = "V",
-                            ["@return.inner"] = "V",
+                            ["@return.inner"] = "v",
                             ["@return.outer"] = "V",
                         },
                     },
@@ -70,6 +74,8 @@ return {
                         enable = true,
                         set_jumps = true,
                         goto_next_start = {
+                            ["]aj"] = "@call.outer",
+                            ["]ij"] = "@call.inner",
                             ["]af"] = "@function.outer",
                             ["]if"] = "@function.inner",
                             ["]as"] = "@class.outer",
@@ -88,6 +94,8 @@ return {
                             ["]ar"] = "@return.outer",
                         },
                         goto_next_end = {
+                            ["[aj"] = "@call.outer",
+                            ["[ij"] = "@call.inner",
                             ["[af"] = "@function.outer",
                             ["[if"] = "@function.inner",
                             ["[as"] = "@class.outer",
@@ -106,6 +114,8 @@ return {
                             ["[ar"] = "@return.outer",
                         },
                         goto_previous_start = {
+                            ["}aj"] = "@call.outer",
+                            ["}ij"] = "@call.inner",
                             ["}af"] = "@function.outer",
                             ["}if"] = "@function.inner",
                             ["}as"] = "@class.outer",
@@ -124,6 +134,8 @@ return {
                             ["}ar"] = "@return.outer",
                         },
                         goto_previous_end = {
+                            ["{aj"] = "@call.outer",
+                            ["{ij"] = "@call.inner",
                             ["{af"] = "@function.outer",
                             ["{if"] = "@function.inner",
                             ["{as"] = "@class.outer",
@@ -142,6 +154,8 @@ return {
                             ["{ar"] = "@return.outer",
                         },
                         goto_next = {
+                            [")aj"] = "@call.outer",
+                            [")ij"] = "@call.inner",
                             [")af"] = "@function.outer",
                             [")if"] = "@function.inner",
                             [")as"] = "@clajs.outer",
@@ -160,6 +174,8 @@ return {
                             [")ar"] = "@return.outer",
                         },
                         goto_previous = {
+                            ["(aj"] = "@call.outer",
+                            ["(ij"] = "@call.inner",
                             ["(af"] = "@function.outer",
                             ["(if"] = "@function.inner",
                             ["(as"] = "@class.outer",
@@ -191,5 +207,5 @@ return {
             })
         end,
     },
-    {"wurli/contextindent.nvim", opts = { pattern = "*" }, dependencies = { "nvim-treesitter/nvim-treesitter" },}
 }
+

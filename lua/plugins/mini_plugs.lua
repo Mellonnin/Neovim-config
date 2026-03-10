@@ -24,7 +24,9 @@ return {
                     ['>'] = { output = { left = '<', right = '>' } },
                     ['<'] = { output = { left = '<', right = '>' } },
                     ['"'] = { output = { left = '"', right = '"' } },
-                    ["'"] = { output = { left = "'", right = "'" } },
+                    [","] = { output = { left = ",", right = "," } },
+                    [";"] = { output = { left = ";", right = ";" } },
+                    ["."] = { output = { left = ".", right = "." } },
                 },
                 mappings = {
                     add = 'sa',     -- Add surrounding in Visual modes
@@ -33,7 +35,7 @@ return {
                 },
                 n_lines = 100,
                 respect_selection_type = true,
-                search_method = 'cover',
+                search_method = "cover",
                 silent = true,
             })
         end

@@ -1,0 +1,76 @@
+-- vim.keymap.set("n", "<leader>cc",
+--   "<cmd>w<CR>" ..
+--   "<cmd>!gcc % -o %:r<CR>",
+--   { desc = "Compile" }
+-- )
+--
+-- vim.keymap.set("n", "<leader>cC",
+--   "<cmd>w<CR>" ..
+--   "<cmd>!gcc % -o %:r && ./%:r<CR>",
+--   { desc = "Compile & Run" }
+-- )
+--
+
+vim.opt.makeprg = "gcc % -o %:r"
+vim.keymap.set("n", "<leader>cc",
+  "<cmd>w<CR>" ..
+  "<cmd>make<CR>",
+  { desc = "Compile" }
+)
+vim.keymap.set("n", "<leader>cr",
+    "<cmd>w<CR>" ..
+    "<cmd>!./%:r<CR>",
+    { desc = "Run" }
+)
+
+
+{
+  "ldc2": {
+    "errorformat": "%f(%l): %m",
+    "makeprg": "ldc2"
+  },
+  "gradle": {
+    "errorformat": "%A%f:%l:%m,%-Z%p^,%-C%.%#",
+    "makeprg": "gradle"
+  },
+  "dub": {
+    "errorformat": "%f(%l): %m,%f(%l\\,%c): %m",
+    "makeprg": "dub"
+  },
+  "rdmd": {
+    "errorformat": "%f(%l): %m",
+    "makeprg": "rdmd"
+  },
+  "mvn": {
+    "errorformat": "[ERROR] %f:[%l\\,%v] %m",
+    "makeprg": "mvn"
+  },
+  "ldc": {
+    "errorformat": "%f(%l): %m",
+    "makeprg": "ldc"
+  },
+  "mcs": {
+    "errorformat": "%f(%l\\,%c): %m",
+    "makeprg": "mcs"
+  },
+  "dmd": {
+    "errorformat": "%f(%l): %m",
+    "makeprg": "dmd"
+  },
+  "csc": {
+    "errorformat": "%#%f(%l\\,%c): %m",
+    "makeprg": "csc"
+  },
+  "ant": {
+    "errorformat": "%A%f:%l:%m,%-Z%p^,%-C%.%#",
+    "makeprg": "ant"
+  },
+  "ruby": {
+    "errorformat": "%f:%l:%m",
+    "makeprg": "ruby"
+  },
+  "pycodestyle": {
+    "errorformat": "%f:%l:%c: %m",
+    "makeprg": "pycodestyle"
+  }
+}

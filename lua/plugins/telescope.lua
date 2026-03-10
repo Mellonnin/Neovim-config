@@ -57,13 +57,24 @@ return {
 
         vim.keymap.set("n", "<leader>fk", function() pathogen.find_files({ cwd = utils.buffer_dir() }) end, { desc = "search files in cdw" })
         vim.keymap.set("n", "<leader>fs", pathogen.grep_string, { desc = "search current word" })
-        vim.keymap.set("n", "<leader>fw", pathogen.live_grep, { desc = "search word " })
+        -- vim.keymap.set("n", "<leader>fw", pathogen.live_grep, { desc = "search word " })
+        vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "search word " })
         vim.keymap.set("n", "<leader>ff", pathogen.find_files, { desc = "search files" })
         vim.keymap.set("n", "<leader>fr", function() recent_file.recent_files({ require("telescope.themes").get_ivy {} }) end)
         vim.keymap.set("n", "<leader>fe", function() builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown { previewer = false }) end,
             { desc = "fuzzily search in current buffer" })
-        vim.keymap.set("n", "<leader>fo", builtin.buffers, { desc = "search buffers" })
-        vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "search diagnostics" })
+        vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "search buffers" })
+       vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "search diagnostics" })
         vim.keymap.set("n", "<leader>cd", function() zoxide.list(require("telescope.themes").get_ivy {}) end)
+      -- builtin.quickfix
+      -- builtin.quickfixhistory
+      -- builtin.loclist
+      -- builtin.jumplist
+      -- builtin.lsp_incoming_calls
+
+-- builtin.lsp_type_definitions({opts}) *telescope.builtin.lsp_type_definitions()*
+-- builtin.lsp_implementations({opts})  *telescope.builtin.lsp_implementations()*
+-- -- builtin.lsp_outgoing_calls({opts})    *telescope.builtin.lsp_outgoing_calls()*
+-- builtin.lsp_definitions({opts})          *telescope.builtin.lsp_definitions()*
     end
 }
