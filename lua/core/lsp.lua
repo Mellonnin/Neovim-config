@@ -53,11 +53,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", "gf", vim.diagnostic.open_float, { buffer = args.buf, remap = true, desc = "Open Diagnostic Float" })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, noremap = true, desc = "Hover Documentation" })
       vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = args.buf, remap = true, desc = "Signature Documentation" })
-      --vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { buffer = args.buf, remap = true, desc = "Rename all references" })
+      vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { buffer = args.buf, remap = true, desc = "Rename all references" })
       vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = args.buf, remap = true, desc = "Format" })
       -- vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,  { buffer = args.buf,noremap= true, desc = "Code action"           })
-      vim.keymap.set("n", "<leader>lv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>",
-         { buffer = args.buf, remap = true, desc = "Goto Definition in Vertical Split" })
+      vim.keymap.set("n", "<leader>lv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", { buffer = args.buf, remap = true, desc = "Goto Definition in Vertical Split" })
 
       local function client_supports_method(client, method, bufnr)
          if vim.fn.has 'nvim-0.11' == 1 then

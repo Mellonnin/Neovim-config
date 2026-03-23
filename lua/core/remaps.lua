@@ -81,17 +81,19 @@ vim.keymap.set({"n","v"}, "<leader>Y", [["+y$]], { desc = "Yank nella clipboard 
 vim.keymap.set({"n","v"}, "Y", "y$", { desc = "yank dal cursore in poi" })
 
 --delete
-vim.keymap.set({"n","v"}, "<leader>d", [["_d]], { desc = "il delete non va nella clipboard di nvim" })
-vim.keymap.set({"n","v"}, "<leader>D", [["_D]], { desc = "delete dal cursore in poi senza andare nella clipboard di nvim" })
+vim.keymap.set({"n","v"}, "<leader>d", [["+d]], { desc = "delete nella clipboard di sistema" })
+vim.keymap.set({"n","v"}, "<leader>D", [["+D]], { desc = "Delete nella clipboard di sistema" })
+vim.keymap.set({"n","v"}, "<C-d>", [["_d]], { desc = "il delete non va nella clipboard di nvim" })
+vim.keymap.set({"n","v"}, "<C-D>", [["_D]], { desc = "delete dal cursore in poi senza andare nella clipboard di nvim" })
 
 
 --diagnostics
-vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+vim.keymap.set("n", "<leader>ef", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
 
-vim.keymap.set({ "n", "x" }, "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
+vim.keymap.set({ "n", "x" }, "]e", function() vim.diagnostic.jump({ count = 1, float = true }) end,
    { desc = "Next Diagnostic" })
-vim.keymap.set({ "n", "x" }, "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
+vim.keymap.set({ "n", "x" }, "[e", function() vim.diagnostic.jump({ count = -1, float = true }) end,
    { desc = "Prev Diagnostic" })
 
 vim.keymap.set({ "n", "x" }, "<leader>ca", function() require("tiny-code-action").code_action() end,

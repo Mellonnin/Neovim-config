@@ -1,13 +1,13 @@
 vim.opt_local.makeprg = "gcc -Wall -Wextra -Wshadow -Werror % -o %:r"
 
-vim.keymap.set("n", "<leader>cc",
+vim.keymap.set("n", "<leader>cm",
   "<cmd>w<CR>" ..
-  "<cmd>make<CR>",
+  "<cmd>Make<CR>",
   { desc = "Compile" }
 )
 vim.keymap.set("n", "<leader>cr",
-    "<cmd>vsplit term://" ..
+    "<cmd>split term://" ..
     "./%:r<CR>" ..
-    "<cmd>vertical resize 50<CR>",
+    "<cmd>resize 20<CR>",
     { desc = "Run" }
 )

@@ -1,4 +1,5 @@
 -- start stole part from harpoon-lualine
+
 local D = {}
 
 D.lazy_require = function(require_path)
@@ -28,7 +29,6 @@ local default_options = {
     indicators = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
     active_indicators = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" },
     _separator = " ",
-    no_harpoon = "Harpoon not loaded",
     color_active = nil,
 }
 
@@ -145,9 +145,23 @@ local function get_branch()
     if branch ~= nil then
         return branch[1]
     end
+  end
+local function gitsigns()
+  -- Check if gitsigns is loaded and the data exists for the buffer
+  local gitsigns_dict = vim.b.gitsigns_status_dict
+  if not gitsigns_dict or vim.tbl_isempty(gitsigns_dict) then
+    return ""
+  end
+
+  local added = gitsigns_dict.added or 0
+  local changed = gitsigns_dict.changed or 0
+  local removed = gitsigns_dict.removed or 0
+
+  -- Format the string (adjust icons/colors as you like)
+  local stat = string.format(" +%d ~%d -%d ", added, changed, removed)
+  return stat
 end
 -- start stole from u/shynerd089
-
 function _G.statusline()
     return table.concat({
         filename(),
@@ -155,12 +169,12 @@ function _G.statusline()
         " ",
         "%m%r",
         "  ",
-         -- recipe.statusline,
         get_branch(),
+        "  ",
+        gitsigns(),
         "%=",
         setup_diagnostics(),
         "  ",
-        -- require("argmark").get_display_text,
         "[",
         harpoon_status(),
         "]",
@@ -171,5 +185,5 @@ function _G.statusline()
         "  ",
     })
 end
-
 vim.o.statusline = "%{%v:lua._G.statusline()%}"
+-- vim.o.statusline+=%{get(b:,'gitsigns_status','')} --da capire come integrarlo
