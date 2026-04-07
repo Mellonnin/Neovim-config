@@ -152,15 +152,18 @@ local function gitsigns()
   if not gitsigns_dict or vim.tbl_isempty(gitsigns_dict) then
     return ""
   end
+  -- conflict_count({bufnr})
 
   local added = gitsigns_dict.added or 0
   local changed = gitsigns_dict.changed or 0
   local removed = gitsigns_dict.removed or 0
 
   -- Format the string (adjust icons/colors as you like)
-  local stat = string.format(" +%d ~%d -%d ", added, changed, removed)
+  local stat = string.format("+%d ~%d -%d", added, changed, removed)
   return stat
 end
+
+
 -- start stole from u/shynerd089
 function _G.statusline()
     return table.concat({
@@ -186,4 +189,3 @@ function _G.statusline()
     })
 end
 vim.o.statusline = "%{%v:lua._G.statusline()%}"
--- vim.o.statusline+=%{get(b:,'gitsigns_status','')} --da capire come integrarlo

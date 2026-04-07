@@ -35,6 +35,16 @@ vim.diagnostic.config({
 
 -- diagnostics
 
+local dropdown = require("telescope.themes").get_dropdown({
+  layout_strategy = 'center',
+  layout_config = {
+    -- anchor = 'N',
+    height = 0.60,
+    width = 0.9,
+  },
+  previewer = false,
+  prompt_title = false,
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
    group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -45,69 +55,51 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
          { desc = "list workspace folders of buffer" })
 
+      -- vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, noremap = true, desc = "Hover Documentation" })
       vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { buffer = args.buf, remap = true, desc = "Goto Declaration" })
-      vim.keymap.set("n", "gj", vim.lsp.buf.definition, { buffer = args.buf, remap = true, desc = "Goto Definition" })
-      vim.keymap.set("n", "gk", vim.lsp.buf.type_definition, { buffer = args.buf, remap = true, desc = "Goto type definition" })
-      vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { buffer = args.buf, remap = true, desc = "Goto implementation" })
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf, remap = true, desc = "Goto references" })
-      vim.keymap.set("n", "gf", vim.diagnostic.open_float, { buffer = args.buf, remap = true, desc = "Open Diagnostic Float" })
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, noremap = true, desc = "Hover Documentation" })
+      -- vim.keymap.set("n", "gj", vim.lsp.buf.definition, { buffer = args.buf, remap = true, desc = "Goto Definition" })
+      -- vim.keymap.set("n", "gk", vim.lsp.buf.type_definition, { buffer = args.buf, remap = true, desc = "Goto type definition" })
+      -- vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { buffer = args.buf, remap = true, desc = "Goto implementation" })
+      -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf, remap = true, desc = "Goto references" })
       vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = args.buf, remap = true, desc = "Signature Documentation" })
-      vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { buffer = args.buf, remap = true, desc = "Rename all references" })
+      -- vim.keymap.set("n", "go", vim.lsp.buf.outgoing_calls, { buffer = args.buf, remap = true, desc = "outgoing_calls" })
+      -- vim.keymap.set("n", "gc", vim.lsp.buf.incoming_calls, { buffer = args.buf, remap = true, desc = "incoming_calls" })
+      vim.keymap.set("n", "gt", vim.lsp.buf.typehierarchy, { buffer = args.buf, remap = true, desc = "typehierarchy" })
+      -- vim.keymap.set("n", "gf", vim.diagnostic.open_float, { buffer = args.buf, remap = true, desc = "Open Diagnostic Float" })
+      vim.keymap.set("n", "<leader>lr", "grn", {remap = true, desc = "Rename all references" })
       vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = args.buf, remap = true, desc = "Format" })
-      -- vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,  { buffer = args.buf,noremap= true, desc = "Code action"           })
-      vim.keymap.set("n", "<leader>lv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", { buffer = args.buf, remap = true, desc = "Goto Definition in Vertical Split" })
+      vim.keymap.set("n", "<leader>la", function() require("tiny-code-action").code_action() end, { noremap = true, silent = true })
 
-      local function client_supports_method(client, method, bufnr)
-         if vim.fn.has 'nvim-0.11' == 1 then
-            return client:supports_method(method, bufnr)
-         else
-            return client.supports_method(method, { bufnr = bufnr })
-         end
-      end
 
+
+
+
+
+      -- vim.keymap.set("n","gd",function() require("telescope.builtin").lps_type_declaration(require("telescope.themes").get_dropdown { previewer = false }) end )
+      -- vim.keymap.set("n","gt",function() require("telescope.builtin").lsp_typehierarchy(require("telescope.themes").get_dropdown { previewer = false }) end )
+      vim.keymap.set("n","gj",function() require("telescope.builtin").lsp_definitions(dropdown) end )
+      vim.keymap.set("n","gk",function() require("telescope.builtin").lsp_type_definitions(dropdown) end )
+      vim.keymap.set("n","gl",function() require("telescope.builtin").lsp_implementations(dropdown) end )
+      vim.keymap.set("n","gr",function() require("telescope.builtin").lsp_references(dropdown)end)
+      vim.keymap.set("n","go",function() require("telescope.builtin").lsp_outgoing_calls(dropdown) end )
+      vim.keymap.set("n","gc",function() require("telescope.builtin").lsp_incoming_calls(dropdown) end )
+
+
+
+--  ]d jumps to the next diagnostic in the buffer. ]d-default
+-- [d jumps to the previous diagnostic in the buffer. [d-default
+-- ]D jumps to the last diagnostic in the buffer. ]D-default
+-- [D jumps to the first diagnostic in the buffer. [D-default 
+-- C-s in insert e' signature help
+
+
+
+
+
+      local function client_supports_method(client, method, bufnr) return client:supports_method(method, bufnr) end
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, args.buf) then
-
-    -- client.server_capabilities.completionProvider.triggerCharacters = vim.split("qwertyuiopasdfghjklzxcvbnm. ", "")
-    -- vim.api.nvim_create_autocmd({ 'TextChangedI' }, {
-    --   buffer = args.buf,
-    --   callback = function()
-    --      vim.lsp.completion.get()
-    --   end
-    -- })
-    -- vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-    -- ---]]
-    -- ---[[Code required to add documentation popup for an item
-    -- local _, cancel_prev = nil, function() end
-    -- vim.api.nvim_create_autocmd('CompleteChanged', {
-    --   buffer = args.buf,
-    --   callback = function()
-    --     cancel_prev()
-    --     local info = vim.fn.complete_info({ 'selected' })
-    --     local completionItem = vim.tbl_get(vim.v.completed_item, 'user_data', 'nvim', 'lsp', 'completion_item')
-    --     if nil == completionItem then
-    --       return
-    --     end
-    --     _, cancel_prev = vim.lsp.buf_request(args.buf,
-    --       vim.lsp.protocol.Methods.completionItem_resolve,
-    --       completionItem,
-    --       function(err, item, ctx)
-    --         if not item then
-    --           return
-    --         end
-    --         local docs = (item.documentation or {}).value
-    --         local win = vim.api.nvim__complete_set(info['selected'], { info = docs })
-    --         if win.winid and vim.api.nvim_win_is_valid(win.winid) then
-    --           vim.treesitter.start(win.bufnr, 'markdown')
-    --           vim.wo[win.winid].conceallevel = 3
-    --         end
-    --       end)
-    --   end
-    -- })
-    -- ---]]
          local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
-
          -- When cursor stops moving: Highlights all instances of the symbol under the cursor
          -- When cursor moves: Clears the highlighting
          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -120,7 +112,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             group = highlight_augroup,
             callback = vim.lsp.buf.clear_references,
          })
-
          -- When LSP detaches: Clears the highlighting
          vim.api.nvim_create_autocmd('LspDetach', {
             group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),

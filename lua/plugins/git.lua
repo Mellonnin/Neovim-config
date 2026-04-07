@@ -136,7 +136,7 @@ return {
       hooks = {
         on_select_commit = function(commit)
           -- vim.notify('GitMessenger' .. commit.hash .. '^!')
-          -- vim.cmd(':GitMessenger  ' .. commit.hash .. '^!')
+          vim.cmd('GitMessenger' .. commit.hash)
           -- print('selected commit:', commit.hash)
         end,
         on_select_range_commit = function(from, to)

@@ -1,5 +1,5 @@
 return {
-  { 'nvim-java/nvim-java',
+  { 'nvim-java/nvim-java', -- da togliere
     config = function()
       require('java').setup()
       vim.lsp.enable('jdtls')
@@ -10,7 +10,7 @@ return {
     event = "LspAttach",
     opts = {}, },
   { "williamboman/mason.nvim", config = function() require("mason").setup() end },
-  { "hrsh7th/nvim-cmp",
+  { "hrsh7th/nvim-cmp", -- da togliere
     dependencies = { "hrsh7th/cmp-cmdline", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", },
     config = function()
       local cmp = require("cmp")

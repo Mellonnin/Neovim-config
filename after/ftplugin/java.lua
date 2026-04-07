@@ -2,13 +2,13 @@ vim.opt_local.makeprg = "javac %"
 vim.opt_local.errorformat= "%A%f:%l:%m,%-Z%p^,%-C%.%#"
 
 
-vim.keymap.set("n", "<leader>cm",
+vim.keymaps.set("n", "<leader>cm",
   "<cmd>w<CR>" ..
   "<cmd>Make<CR>",
   { desc = "Compile" }
 )
 
-vim.keymap.set("n", "<leader>cr",
+vim.keymaps.set("n", "<leader>cr",
   "<cmd>w<CR>" ..
   "<cmd>split term://" ..
   "java ".. "%:r<CR>".. -- :r toglie il filetype dal comando
