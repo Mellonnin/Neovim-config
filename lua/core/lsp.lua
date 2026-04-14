@@ -1,12 +1,15 @@
 vim.lsp.enable({
-   "jdtls",
-   "lua_ls",
-   "gopls",
-   "sqlls",
-   "pyrefly",
-   "clangd",
-   "elixir-ls",
-   "bash-language-server",
+  "jdtls",
+  "lua_ls",
+  "cssls",
+  "gopls",
+  "pyrefly",
+  "clangd",
+  "sqlls",
+  "elixirls",
+  "html",
+  "bashls",
+  "stylelint_lsp",
 })
 
 vim.diagnostic.config({

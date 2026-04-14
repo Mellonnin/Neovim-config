@@ -26,8 +26,7 @@
           show_hidden = true,
         },
       }
-      vim.keymap.set("n", "<leader>_", require("oil").toggle_float, { desc = "open directory in floating window" })
-      vim.keymap.set("n", "_", "<CMD>Oil<CR>", { desc = "Open parent directory" })       -- Open parent directory in current window
+      vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>", { desc = "Open parent directory" })       -- Open parent directory in current window
     end, },
 
   { "benomahony/oil-git.nvim", dependencies = { "stevearc/oil.nvim" } }

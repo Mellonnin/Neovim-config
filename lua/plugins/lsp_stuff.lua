@@ -1,4 +1,5 @@
 return {
+  -- {'nanotee/sqls.nvim',config = function() require("sqls").setup() end},
   { 'nvim-java/nvim-java', -- da togliere
     config = function()
       require('java').setup()
@@ -25,7 +26,7 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
           ["<S-tab>"] = cmp.mapping.confirm({ select = true }),
           ["<C-n>"] = cmp.mapping.select_next_item(),
-          ["<C-m>"] = cmp.mapping.select_prev_item(),
+          ["<C-b>"] = cmp.mapping.select_prev_item(),
 
           -- commands in completion mode (see |popupmenu-keys|)
           -- |complete_CTRL-E| CTRL-E	stop completion and go back to original text

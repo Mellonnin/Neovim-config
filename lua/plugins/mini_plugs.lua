@@ -20,10 +20,6 @@ return {
           ['{'] = { output = { left = '{', right = '}' } },
           ['>'] = { output = { left = '<', right = '>' } },
           ['<'] = { output = { left = '<', right = '>' } },
-          ['"'] = { output = { left = '"', right = '"' } },
-          [","] = { output = { left = ",", right = "," } },
-          [";"] = { output = { left = ";", right = ";" } },
-          ["."] = { output = { left = ".", right = "." } },
         },
         mappings = {
           add = 'sa',               -- Add surrounding in Visual modes
