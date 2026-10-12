@@ -16,7 +16,5 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 require("core.options")
 require("core.remaps")
-require("core.terminal")
 require("core.lsp")
 require("ui.statusline")
-

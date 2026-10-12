@@ -1,9 +1,8 @@
 return {
-  {"tversteeg/registers.nvim",
+  {"mgdbbrt/registers.nvim",
     cmd = "Registers",
     keys = {
 			{ "\"",     mode = { "n", "v" } },
-			{ "<c-\'>", mode = "i" }
 		},
 		name = "registers",
 		config = function()
@@ -46,57 +45,14 @@ return {
 			vim.diagnostic.config({ virtual_text = false })
 		end
 	},
-	{
-		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
-		cmd = "Trouble",
-		defaults = {
-			auto_close = true, -- auto close when there are no items
-			auto_open = true, -- auto open when there are items
-			auto_preview = true, -- automatically open preview when on an item
-			auto_refresh = true, -- auto refresh when open
-			auto_jump = true, -- auto jump to the item when there's only one
-			focus = false, -- Focus the window when opened
-			restore = true, -- restores the last location in the list when opening
-			follow = true, -- Follow the current item
-			indent_guides = true, -- show indent guides
-			max_items = 200, -- limit number of items that can be displayed per section
-			multiline = true, -- render multi-line messages
-			pinned = false, -- When pinned, the opened trouble window will be bound to the current buffer
-			warn_no_results = true, -- show a warning when there are no results
-			open_no_results = false, -- open the trouble window when there are no results
-		},
-		keys = {
-			{
-				"<leader>td",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>tb",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>ts",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>tr",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>tl",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>tq",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
-		},
-	}
+  { "SunnyTamang/select-undo.nvim",
+    config = function()
+    require("select-undo").setup({
+      line_mapping ="Øu",     -- Step undo mapping (frees gu for lowercasing)
+      sweep_mapping="ØU",    -- Sweep undo mapping (frees gU for uppercasing)
+      partial_mapping = "<leader>Øu", -- Partial undo mapping
+    })
+    end
+  }
+
 }

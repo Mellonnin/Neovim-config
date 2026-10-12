@@ -1,15 +1,26 @@
+vim.lsp.config("jdtls",{
+  init_options={
+    bundles= vim.fn.glob("~/.local/share/nvim/packages/java-test/extension/server/com.microsoft.java.debug.plugin-*.jar")
+  },
+})
+
+vim.lsp.config("lua_ls",{})
+
 vim.lsp.enable({
-  "jdtls",
-  "lua_ls",
-  "cssls",
-  "gopls",
-  "pyrefly",
+  "bashls",
   "clangd",
-  "sqlls",
+  "cssls",
   "elixirls",
   "html",
-  "bashls",
-  "stylelint_lsp",
+  "lua_ls",
+  "luacheck",
+  "pyrefly",
+  "sqlls",
+  "ts_ls",
+  "jdtls",
+  "java-test",
+  "java-debug-adapter",
+
 })
 
 vim.diagnostic.config({
@@ -58,18 +69,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
          { desc = "list workspace folders of buffer" })
 
-      -- vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, noremap = true, desc = "Hover Documentation" })
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, noremap = true, desc = "Hover Documentation" })
       vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { buffer = args.buf, remap = true, desc = "Goto Declaration" })
       -- vim.keymap.set("n", "gj", vim.lsp.buf.definition, { buffer = args.buf, remap = true, desc = "Goto Definition" })
       -- vim.keymap.set("n", "gk", vim.lsp.buf.type_definition, { buffer = args.buf, remap = true, desc = "Goto type definition" })
       -- vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { buffer = args.buf, remap = true, desc = "Goto implementation" })
       -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf, remap = true, desc = "Goto references" })
       vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = args.buf, remap = true, desc = "Signature Documentation" })
-      -- vim.keymap.set("n", "go", vim.lsp.buf.outgoing_calls, { buffer = args.buf, remap = true, desc = "outgoing_calls" })
-      -- vim.keymap.set("n", "gc", vim.lsp.buf.incoming_calls, { buffer = args.buf, remap = true, desc = "incoming_calls" })
+      vim.keymap.set("n", "go", vim.lsp.buf.outgoing_calls, { buffer = args.buf, remap = true, desc = "outgoing_calls" })
+      vim.keymap.set("n", "gc", vim.lsp.buf.incoming_calls, { buffer = args.buf, remap = true, desc = "incoming_calls" })
       vim.keymap.set("n", "gt", vim.lsp.buf.typehierarchy, { buffer = args.buf, remap = true, desc = "typehierarchy" })
-      -- vim.keymap.set("n", "gf", vim.diagnostic.open_float, { buffer = args.buf, remap = true, desc = "Open Diagnostic Float" })
-      vim.keymap.set("n", "<leader>lr", "grn", {remap = true, desc = "Rename all references" })
+      vim.keymap.set("n", "<leader>lr", vim.lsp.codelens.run, { buffer = args.buf, remap = true, desc = "codelens" })
+      vim.keymap.set("n", "gf", vim.diagnostic.open_float, { buffer = args.buf, remap = true, desc = "Open Diagnostic Float" })
+      vim.keymap.set("n", "<leader>rn", "grn", {remap = true, desc = "Rename all references" })
       vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = args.buf, remap = true, desc = "Format" })
       vim.keymap.set("n", "<leader>la", function() require("tiny-code-action").code_action() end, { noremap = true, silent = true })
 
@@ -84,8 +96,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n","gk",function() require("telescope.builtin").lsp_type_definitions(dropdown) end )
       vim.keymap.set("n","gl",function() require("telescope.builtin").lsp_implementations(dropdown) end )
       vim.keymap.set("n","gr",function() require("telescope.builtin").lsp_references(dropdown)end)
-      vim.keymap.set("n","go",function() require("telescope.builtin").lsp_outgoing_calls(dropdown) end )
-      vim.keymap.set("n","gc",function() require("telescope.builtin").lsp_incoming_calls(dropdown) end )
 
 
 
@@ -116,6 +126,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             callback = vim.lsp.buf.clear_references,
          })
          -- When LSP detaches: Clears the highlighting
+      end
          vim.api.nvim_create_autocmd('LspDetach', {
             group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
             callback = function(event2)
@@ -123,8 +134,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
                vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
             end,
          })
-      end
-
 
   end
 })
+

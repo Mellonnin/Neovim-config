@@ -2,7 +2,7 @@
 vim.opt_local.makeprg = "uv run %"
 
 
-vim.keymaps.set("n", "<leader>cr",
+vim.keymap.set("n", "<leader>mr",
     "<cmd>w<CR>" ..
     -- "<cmd>Make; read<CR>" ..
     -- "<cmd>!tmux split-window -v" ..

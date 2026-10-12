@@ -1,5 +1,4 @@
 return {
-  { "kokusenz/delta.lua"},
   { "tpope/vim-dispatch" },
   { "tpope/vim-dadbod",
     dependencies = {

@@ -4,6 +4,6 @@
         "actions"
     ],
     "diagnostics.disable": [
-        "missing-fields"
+      "missing-fields"
     ]
 }

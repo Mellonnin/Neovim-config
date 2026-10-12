@@ -1,6 +1,6 @@
 vim.opt_local.makeprg = "$CATALINA_HOME/bin/startup.sh"
 
-vim.keymaps.set("n", "<leader>md",
+vim.keymap.set("n", "<leader>md",
     "<cmd>w<CR>" ..
     "<cmd>Make<CR>",
     -- "<cmd>!tmux split-window -v" ..
@@ -8,7 +8,7 @@ vim.keymaps.set("n", "<leader>md",
     { desc = "Deploy" }
 )
 
-vim.keymaps.set("n", "<leader>ms",
+vim.keymap.set("n", "<leader>ms",
 
     "<cmd>w<CR>" ..
     "<cmd>split term://" ..

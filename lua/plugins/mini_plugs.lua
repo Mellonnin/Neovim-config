@@ -20,11 +20,12 @@ return {
           ['{'] = { output = { left = '{', right = '}' } },
           ['>'] = { output = { left = '<', right = '>' } },
           ['<'] = { output = { left = '<', right = '>' } },
+          ['"'] = { output = { left = '"', right = '"' } },
         },
         mappings = {
-          add = 'sa',               -- Add surrounding in Visual modes
-          delete = 'sd',            -- Delete surrounding
-          replace = 'sr',           -- Replace surrounding
+          add = 'Ø"',               -- Add surrounding in Visual modes
+          delete = 'Ø[',            -- Delete surrounding
+          replace = 'Ø^',           -- Replace surrounding
         },
         n_lines = 100,
         respect_selection_type = true,
