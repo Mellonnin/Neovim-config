@@ -70,15 +70,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
          { desc = "list workspace folders of buffer" })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, noremap = true, desc = "Hover Documentation" })
-      vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { buffer = args.buf, remap = true, desc = "Goto Declaration" })
-      -- vim.keymap.set("n", "gj", vim.lsp.buf.definition, { buffer = args.buf, remap = true, desc = "Goto Definition" })
-      -- vim.keymap.set("n", "gk", vim.lsp.buf.type_definition, { buffer = args.buf, remap = true, desc = "Goto type definition" })
-      -- vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { buffer = args.buf, remap = true, desc = "Goto implementation" })
-      -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf, remap = true, desc = "Goto references" })
+      vim.keymap.set("n", "gf", vim.lsp.buf.definition, { buffer = args.buf, remap = true, desc = "Goto Definition" })
+      vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = args.buf, remap = true, desc = "Goto type definition" })
+      vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { buffer = args.buf, remap = true, desc = "Goto implementation" })
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf, remap = true, desc = "Goto references" })
       vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = args.buf, remap = true, desc = "Signature Documentation" })
       vim.keymap.set("n", "go", vim.lsp.buf.outgoing_calls, { buffer = args.buf, remap = true, desc = "outgoing_calls" })
       vim.keymap.set("n", "gc", vim.lsp.buf.incoming_calls, { buffer = args.buf, remap = true, desc = "incoming_calls" })
-      vim.keymap.set("n", "gt", vim.lsp.buf.typehierarchy, { buffer = args.buf, remap = true, desc = "typehierarchy" })
+      vim.keymap.set("n", "gh", vim.lsp.buf.typehierarchy, { buffer = args.buf, remap = true, desc = "typehierarchy" })
       vim.keymap.set("n", "<leader>lr", vim.lsp.codelens.run, { buffer = args.buf, remap = true, desc = "codelens" })
       vim.keymap.set("n", "gf", vim.diagnostic.open_float, { buffer = args.buf, remap = true, desc = "Open Diagnostic Float" })
       vim.keymap.set("n", "<leader>rn", "grn", {remap = true, desc = "Rename all references" })
@@ -90,12 +89,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 
 
-      -- vim.keymap.set("n","gd",function() require("telescope.builtin").lps_type_declaration(require("telescope.themes").get_dropdown { previewer = false }) end )
-      -- vim.keymap.set("n","gt",function() require("telescope.builtin").lsp_typehierarchy(require("telescope.themes").get_dropdown { previewer = false }) end )
-      vim.keymap.set("n","gj",function() require("telescope.builtin").lsp_definitions(dropdown) end )
-      vim.keymap.set("n","gk",function() require("telescope.builtin").lsp_type_definitions(dropdown) end )
-      vim.keymap.set("n","gl",function() require("telescope.builtin").lsp_implementations(dropdown) end )
-      vim.keymap.set("n","gr",function() require("telescope.builtin").lsp_references(dropdown)end)
+
+      -- vim.keymap.set("n","<leader>gc", require'telescope.builtin'.git_commits, { desc = 'Search commits' })
+      -- vim.keymap.set("n","<leader>gn", require'telescope.builtin'.git_bcommits, { desc = 'Search buffer commits'})
+      -- vim.keymap.set("n","<leader>gb", require'telescope.builtin'.git_branches, { desc = 'Search branch' })
+      -- vim.keymap.set("n","<leader>gu", require'telescope.builtin'.git_status, { desc = 'Search status word' })
+      -- vim.keymap.set("n","<leader>ga", require'telescope.builtin'.git_stash, { desc = 'Search stash word' })
 
 
 

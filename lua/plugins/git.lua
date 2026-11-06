@@ -42,6 +42,9 @@ return {
           map("n", "<leader>bf", function() gitsigns.blame({ full = true }) end)
 
           map("n", "<leader>bs", gitsigns.stage_buffer)
+          map('n', '<leader>hd', gitsigns.diffthis)
+
+          map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
           map("n", "<leader>br", gitsigns.reset_buffer)
 
 
@@ -54,8 +57,6 @@ return {
           map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
           map("n", "<leader>td", gitsigns.toggle_word_diff)
           map("n", "<leader>th", gitsigns.toggle_linehl)
-          map("n", "<leader>tc", gitsigns.show_commit)
-          map("n", "<leader>ta", gitsigns.get_actions)
 
           -- Text object
           map({ "o", "x" }, "ih", gitsigns.select_hunk)
@@ -134,7 +135,6 @@ return {
       local Hooks = require("git-worktree.hooks")
       local config = require('git-worktree.config')
       local update_on_switch = Hooks.builtins.update_current_buffer_on_switch
-      local worktree = require("git-worktree")
 
       Hooks.register(Hooks.type.SWITCH, function(path, prev_path)
         vim.notify("Moved from " .. prev_path .. " to " .. path)
@@ -144,11 +144,52 @@ return {
       Hooks.register(Hooks.type.DELETE, function()
         vim.cmd(config.update_on_change_command)
       end)
-
-      -- vim.keymap.set("n", "<leader>wc", function() worktree.create_worktree("Testing", "Testing", "origin") end, { desc = "create worktree" })
-      -- vim.keymap.set("n", "<leader>ws", function() worktree.switch_worktree("Serena") end, { desc = "switch worktree" })
-      -- vim.keymap.set("n", "<leader>ws", function() worktree.switch_worktree("Serena") end, { desc = "switch worktree" })
-      -- vim.keymap.set("n", "<leader>wd", function() worktree.delete_worktree("Serena") end, { desc = "delete worktree" })
     end
-  }
+  },
+{
+  "pwntester/octo.nvim",
+  cmd = "Octo",
+  opts = {
+    -- or "fzf-lua" or "snacks" or "default"
+    picker = "telescope",
+    -- bare Octo command opens picker of commands
+    enable_builtin = true,
+  },
+  keys = {
+    {
+      "<leader>oi",
+      "<CMD>Octo issue list<CR>",
+      desc = "List GitHub Issues",
+    },
+    {
+      "<leader>op",
+      "<CMD>Octo pr list<CR>",
+      desc = "List GitHub PullRequests",
+    },
+    {
+      "<leader>od",
+      "<CMD>Octo discussion list<CR>",
+      desc = "List GitHub Discussions",
+    },
+    {
+      "<leader>on",
+      "<CMD>Octo notification list<CR>",
+      desc = "List GitHub Notifications",
+    },
+    {
+      "<leader>os",
+      function()
+        require("octo.utils").create_base_search_command { include_current_repo = true }
+      end,
+      desc = "Search GitHub",
+    },
+  },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
+    -- OR "ibhagwan/fzf-lua",
+    -- OR "folke/snacks.nvim",
+    "nvim-tree/nvim-web-devicons", -- optional if file_panel.icons is a function
+  },
+}
 }

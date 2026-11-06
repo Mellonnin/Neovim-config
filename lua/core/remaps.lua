@@ -1,5 +1,5 @@
   -- best remap ever
-vim.keymap.set({ "i", "c","t" }, "<C-e>", "<C-o>w<C-o>dw", {noremap=true, desc = "delete word after the cursor"})
+vim.keymap.set({ "i", "c","t" }, "<C-e>", "<C-o>e<C-w>", {noremap=true, desc = "delete word after the cursor"})
 vim.keymap.set({ "i", "c","t" }, "<C-a>", "<c-o>D", {noremap=true, desc = "delete all characters after the cursor"})
 -- CTRL-H delete	
 -- CTRL-M newline	
@@ -35,7 +35,7 @@ vim.keymap.set({"n","x"}, "<C-s>", "g,", { desc = "changelist forward" })
 vim.keymap.set("n", "<leader>b",":ls :b <CR>",{desc = "list buffers" })
 
 --marks
-vim.keymap.set({"n","x"}, "<C-t>","'z")
+vim.keymap.set({"n","x"}, "<C-r>","'z")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set({"n","x"}, "`", "mzg_",{ nowait=true, desc = "go to non blank end of the line" })
 vim.keymap.set({"n","x"}, "|", "mz|" )
@@ -68,28 +68,24 @@ vim.keymap.set("x", "<C-c>", "gc", { remap = true })
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],{desc = "substitute words over the cursor"})
 
 --quickfix
-vim.keymap.set("n", "<leader>qs", [[:cdo s//c/gc<Left><Left><Left><Left><Left>]],{desc = "quickfix select word to change"})
--- copen
--- cclose
--- cc
--- cnext
--- cprev
+vim.keymap.set("n","<leader>qo",":copen")
+vim.keymap.set("n","<leader>ql",":cclose")
+vim.keymap.set("n","<leader>qc",":cc")
+vim.keymap.set("n","<leader>qw",":cw")
+vim.keymap.set("n","<leader>qi",":clist")
+vim.keymap.set("n","<leader>qd",":cadd")
+vim.keymap.set("n","<leader>qf",":cafter")
+vim.keymap.set("n","<leader>qr",":cbefore")
+vim.keymap.set("n","<leader>qe",":cbelow")
+vim.keymap.set("n","<leader>qv",":cabove")
 
 
 
---tmux
 vim.keymap.set("n", "Q", "<nop>")
-
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux new tmux-sessionizer<CR>")
--- vim.keymap.set("n", "<M-h>", "<cmd>silent !tmux new tmux-sessionizer -s 0<CR>")
--- vim.keymap.set("n", "<M-j>", "<cmd>silent !tmux new tmux-sessionizer -s 1<CR>")
--- vim.keymap.set("n", "<M-k>", "<cmd>silent !tmux new tmux-sessionizer -s 2<CR>")
--- vim.keymap.set("n", "<M-l>", "<cmd>silent !tmux new tmux-sessionizer -s 3<CR>")
 
 --clipboard
 --paste
 vim.keymap.set("n", "<leader>p", [["+p]], { desc = "paste nella clipboard di sistema" })
-vim.keymap.set("x", "<leader>p", [["_dp]])
 vim.keymap.set({"n","x"}, "<leader>P", [["+P]], { desc = "Paste nella clipboard di sistema" })
 
 --yoink
@@ -99,7 +95,7 @@ vim.keymap.set({"n","x"}, "Y", "y$", { desc = "yank dal cursore in poi" })
 
 --delete
 vim.keymap.set({"n","x"}, "Ød", [["+d]], { desc = "il delete va nella cliptboard di sistema" })
-vim.keymap.set({"n","x"}, "Ød", [["+D]], { desc = "il Delete va nella cliptboard di sistema" })
+vim.keymap.set({"n","x"}, "ØD", [["+D]], { desc = "il Delete va nella cliptboard di sistema" })
 vim.keymap.set({"n","x"}, "<leader>d", [["_d]], { desc = "il delete non va nella clipboard di nvim" })
 vim.keymap.set({"n","x"}, "<leader>D", [["_D]], { desc = "Delete dal cursore in poi senza andare nella clipboard di nvim" })
 
@@ -142,6 +138,3 @@ vim.keymap.set({"n","x"}, "Øp", function()
 end, { desc = "Select last pasted text with correct visual mode" })
 
 
---DOTO 
--- | | text-objects 
--- gestire lo switch dei worktree

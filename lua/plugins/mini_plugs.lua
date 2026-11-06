@@ -21,6 +21,7 @@ return {
           ['>'] = { output = { left = '<', right = '>' } },
           ['<'] = { output = { left = '<', right = '>' } },
           ['"'] = { output = { left = '"', right = '"' } },
+          ['|'] = { output = { left = '|', right = '|' } },
         },
         mappings = {
           add = 'Ø"',               -- Add surrounding in Visual modes

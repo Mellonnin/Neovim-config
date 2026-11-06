@@ -4,7 +4,7 @@ return {
     dependencies = { "mfussenegger/nvim-dap", "jbyuki/one-small-step-for-vimkind", },
     config = function()
       local dm = require("debugmaster")
-      vim.keymap.set("n", "<C-g>",dm.mode.toggle)
+      vim.keymap.set("n", "<C-b>",dm.mode.toggle)
       vim.keymap.set("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
       -- Press H in debug mode to view available commands.

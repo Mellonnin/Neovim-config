@@ -22,12 +22,9 @@
           ["g\\"] = { "actions.toggle_trash", mode = "n" },
         },
         use_default_keymaps = false,
-        view_options = {
-          show_hidden = true,
-        },
+        view_options = { show_hidden = true, },
       }
-      vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>", { desc = "Open parent directory" })       -- Open parent directory in current window
+      vim.keymap.set("n", "<C-g>", "<CMD>Oil<CR>", { desc = "Open parent directory" })       -- Open parent directory in current window
     end, },
-
   { "benomahony/oil-git.nvim", dependencies = { "stevearc/oil.nvim" } }
 }

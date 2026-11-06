@@ -124,7 +124,7 @@ function _G._statusline()
 		if counts[i] and counts[i] > 0 then
 			diag = diag .. "%#" .. "#" .. labels[i] .. counts[i] .. "%* "
 		end
-	end
+  end
 
     return table.concat({
       "  %*",

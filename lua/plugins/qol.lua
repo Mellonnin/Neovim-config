@@ -45,14 +45,4 @@ return {
 			vim.diagnostic.config({ virtual_text = false })
 		end
 	},
-  { "SunnyTamang/select-undo.nvim",
-    config = function()
-    require("select-undo").setup({
-      line_mapping ="Øu",     -- Step undo mapping (frees gu for lowercasing)
-      sweep_mapping="ØU",    -- Sweep undo mapping (frees gU for uppercasing)
-      partial_mapping = "<leader>Øu", -- Partial undo mapping
-    })
-    end
-  }
-
 }

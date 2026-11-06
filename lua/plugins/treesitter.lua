@@ -3,25 +3,36 @@ return {
     lazy=false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.config").setup({
-        auto_install = true,
-        ensure_installed = { "java", },
-        highlight = { enable = true, },
-        indent = { enable = true, },
+      local treesitter = require("nvim-treesitter")
+      treesitter.install({
+        "asm",
+        "bash", "hyprlang", "kitty", "zsh",
+        "c", "cpp",
+        "css", "scss",
+        "csv", "dockerfile", "json", "toml", "xml", "yaml",
+        "elixir", "erlang",
+        "git_config", "git_rebase", "gitcommit", "gitattributes", "gitignore",
+        "go",
+        "html","html_tags","htmldjango",
+        "http",
+        "java","properties",
+        "javascript","ecma", "typescript",
+        "latex", "markdown", "markdown_inline",
+        "lua","luap",
+        "php","php_only",
+        "python",
+        "regex",
+        "ruby",
+        "rust",
+        "sql",
+        "zig",
       })
     end },
-  { "Wansmer/treesj",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("treesj").setup({
-        vim.keymap.set("n", "Øs", require("treesj").toggle),
-        vim.keymap.set("n", "Øj", function() require("treesj").toggle({ split = { recursive = true } }) end)
-      })
-    end, },
   { "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
     dependencies = { "nvim-treesitter/nvim-treesitter", },
     init = function ()
-      vim.g.no_plugin_maps = true
+      vim.g.no_plugin_maps = false
      -- Or, disable per filetype (add as you like)
     -- vim.g.no_python_maps = true
     -- vim.g.no_ruby_maps = true
@@ -29,21 +40,21 @@ return {
     -- vim.g.no_go_maps = true
     end,
     config = function()
-      local select = require("nvim-treesitter-textobjects.select")
-      local move = require("nvim-treesitter-textobjects.move")
+      local move = require"nvim-treesitter-textobjects.move"
       local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
-      require "nvim-treesitter-textobjects".setup({
+      local select = require"nvim-treesitter-textobjects.select"
+      require ("nvim-treesitter-textobjects").setup({
           select = {
             enable = true,
             include_surrounding_whitespace = false,
             lookahead = true,
             selection_modes = {
-              ["@call.outer"] = "V",
+              ["@call.outer"] = "v",
               ["@call.inner"] = "v",
               ["@function.outer"] = "V",
-              ["@function.inner"] = "v",
+              ["@function.inner"] = "V",
               ["@class.outer"] = "V",
-              ["@class.inner"] = "v",
+              ["@class.inner"] = "V",
               ["@conditional.outer"] = "V",
               ["@conditional.inner"] = "v",
               ["@loop.outer"] = "V",
@@ -52,33 +63,38 @@ return {
               ["@parameter.inner"] = "v",
               ["@attribute.outer"] = "V",
               ["@attribute.inner"] = "v",
-              ["@comment.inner"] = "v",
               ["@comment.outer"] = "V",
-              ["@return.inner"] = "v",
+              ["@comment.inner"] = "v",
               ["@return.outer"] = "V",
+              ["@return.inner"] = "v",
             },
           },
           move = {set_jumps = true,},
         })
       vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
       vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
-      vim.keymap.set({ "x", "o" }, "aj", function() select.select_textobject("@call.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ij", function() select.select_textobject("@call.inner", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "aj", function() select.select_textobject("@function.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "if", function() select.select_textobject("@function.inner", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "as", function() select.select_textobject("@class.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "is", function() select.select_textobject("@class.inner", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ac", function() select.select_textobject("@conditional.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ic", function() select.select_textobject("@conditional.inner", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "al", function() select.select_textobject("@loop.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "il", function() select.select_textobject("@loop.inner", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ap", function() select.select_textobject("@parameter.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ip", function() select.select_textobject("@parameter.inner", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ak", function() select.select_textobject("@comment.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ik", function() select.select_textobject("@comment.inner", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ar", function() select.select_textobject("@return.outer", "textobjects") end)
-      vim.keymap.set({ "x", "o" }, "ir", function() select.select_textobject("@return.inner", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "af", function() select.select_textobject("@function.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "if", function() select.select_textobject("@function.inner", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ac", function() select.select_textobject("@conditional.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ic", function() select.select_textobject("@conditional.inner", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "as", function() select.select_textobject("@class.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "is", function() select.select_textobject("@class.inner", "textobjects") end)
+
+      vim.keymap.set({"x", "o" }, "aj", function() select.select_textobject("@call.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ij", function() select.select_textobject("@call.inner", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "al", function() select.select_textobject("@loop.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "il", function() select.select_textobject("@loop.inner", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ap", function() select.select_textobject("@parameter.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ip", function() select.select_textobject("@parameter.inner", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ak", function() select.select_textobject("@comment.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ik", function() select.select_textobject("@comment.inner", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ar", function() select.select_textobject("@return.outer", "textobjects") end)
+      vim.keymap.set({"x", "o" }, "ir", function() select.select_textobject("@return.inner", "textobjects") end)
 
       vim.keymap.set({"n", "x", "o" }, "]aj", function() move.goto_next_start("@call.outer", "textobjects") end)
       vim.keymap.set({"n", "x", "o" }, "]ij", function() move.goto_next_start("@call.inner", "textobjects") end)
