@@ -35,7 +35,7 @@ vim.keymap.set({"n","x"}, "<C-s>", "g,", { desc = "changelist forward" })
 vim.keymap.set("n", "<leader>b",":ls :b <CR>",{desc = "list buffers" })
 
 --marks
-vim.keymap.set({"n","x"}, "<C-r>","'z")
+vim.keymap.set({"n","x"}, "<C-t>","'z")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set({"n","x"}, "`", "mzg_",{ nowait=true, desc = "go to non blank end of the line" })
 vim.keymap.set({"n","x"}, "|", "mz|" )

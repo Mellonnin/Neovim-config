@@ -8,19 +8,23 @@ vim.lsp.config("lua_ls",{})
 
 vim.lsp.enable({
   "bashls",
+  "basedpyright",
   "clangd",
   "cssls",
   "elixirls",
   "html",
+  "hyprls",
   "lua_ls",
   "luacheck",
   "pyrefly",
+  "stylelint",
   "sqlls",
   "ts_ls",
   "jdtls",
   "java-test",
   "java-debug-adapter",
-
+  "vscode-java-decompiler",
+  "vscode-java-dependency"
 })
 
 vim.diagnostic.config({
